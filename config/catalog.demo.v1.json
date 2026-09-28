@@ -1,0 +1,2718 @@
+{
+  "schemaVersion": "1.0.0",
+  "catalogVersion": "catalog-demo-1.0.0",
+  "language": "zh-CN",
+  "groups": [
+    {
+      "id": "basic",
+      "label": "基础与地区"
+    },
+    {
+      "id": "romance",
+      "label": "婚恋经历"
+    },
+    {
+      "id": "appearance",
+      "label": "外貌与身体"
+    },
+    {
+      "id": "education",
+      "label": "教育背景"
+    },
+    {
+      "id": "career",
+      "label": "职业与个人财务"
+    },
+    {
+      "id": "lifestyle",
+      "label": "性格与生活方式"
+    },
+    {
+      "id": "family",
+      "label": "原生家庭"
+    },
+    {
+      "id": "longterm",
+      "label": "健康与长期相处"
+    },
+    {
+      "id": "types",
+      "label": "类型筛选"
+    }
+  ],
+  "common": {
+    "requirementStates": [
+      "any",
+      "required"
+    ],
+    "defaultRequirement": "any",
+    "ownMissingIsNotZero": true,
+    "enumMultiSelectOperator": "OR",
+    "betweenFieldsOperator": "AND"
+  },
+  "fields": [
+    {
+      "id": "gender",
+      "label": "性别",
+      "group": "basic",
+      "kind": "enum",
+      "selfControl": "single_choice",
+      "requirementControl": "acceptable_multi_choice",
+      "allowedOperators": [
+        "in"
+      ],
+      "requiredSelf": false,
+      "sensitive": false,
+      "sourceItem": "性别",
+      "note": "不参与评分；不依据自身性别自动推断对方性别或性取向。",
+      "options": [
+        {
+          "id": "female",
+          "label": "女"
+        },
+        {
+          "id": "male",
+          "label": "男"
+        },
+        {
+          "id": "other",
+          "label": "其他"
+        }
+      ],
+      "presets": [],
+      "scoreEnabled": false
+    },
+    {
+      "id": "age",
+      "label": "年龄",
+      "group": "basic",
+      "kind": "number",
+      "selfControl": "number_or_preset",
+      "requirementControl": "preset_or_select_range",
+      "allowedOperators": [
+        "gte",
+        "lte",
+        "between",
+        "relative"
+      ],
+      "requiredSelf": false,
+      "sensitive": false,
+      "sourceItem": "年龄",
+      "note": "初版数值支持18～100；无要求为全部成年人。101岁以上按模型尾部合并到100岁端点处理，UI须注明数值上限，不伪称真实年龄上限。",
+      "unit": "岁",
+      "minimum": 18,
+      "maximum": 100,
+      "step": 1,
+      "presets": [
+        {
+          "label": "18～24岁",
+          "op": "between",
+          "min": 18,
+          "max": 24
+        },
+        {
+          "label": "25～29岁",
+          "op": "between",
+          "min": 25,
+          "max": 29
+        },
+        {
+          "label": "30～34岁",
+          "op": "between",
+          "min": 30,
+          "max": 34
+        },
+        {
+          "label": "35～39岁",
+          "op": "between",
+          "min": 35,
+          "max": 39
+        },
+        {
+          "label": "40～49岁",
+          "op": "between",
+          "min": 40,
+          "max": 49
+        },
+        {
+          "label": "50岁及以上",
+          "op": "gte",
+          "value": 50
+        }
+      ],
+      "relativePresets": [
+        {
+          "label": "与我相差3岁以内",
+          "minOffset": -3,
+          "maxOffset": 3
+        },
+        {
+          "label": "与我相差5岁以内",
+          "minOffset": -5,
+          "maxOffset": 5
+        }
+      ],
+      "scoreEnabled": false
+    },
+    {
+      "id": "nationality",
+      "label": "国籍",
+      "group": "basic",
+      "kind": "enum",
+      "selfControl": "single_choice",
+      "requirementControl": "acceptable_multi_choice",
+      "allowedOperators": [
+        "in"
+      ],
+      "requiredSelf": false,
+      "sensitive": false,
+      "sourceItem": "国籍",
+      "note": "初版粗粒度登记国籍单选；其他不等于不适用。以后可扩充类别。不得参与高低评分。",
+      "options": [
+        {
+          "id": "CN",
+          "label": "中国"
+        },
+        {
+          "id": "JP",
+          "label": "日本"
+        },
+        {
+          "id": "KR",
+          "label": "韩国"
+        },
+        {
+          "id": "US",
+          "label": "美国"
+        },
+        {
+          "id": "CA",
+          "label": "加拿大"
+        },
+        {
+          "id": "AU",
+          "label": "澳大利亚"
+        },
+        {
+          "id": "OTHER",
+          "label": "其他"
+        }
+      ],
+      "presets": [],
+      "scoreEnabled": false
+    },
+    {
+      "id": "residence",
+      "label": "现居地",
+      "group": "basic",
+      "kind": "enum",
+      "selfControl": "single_choice",
+      "requirementControl": "acceptable_multi_choice",
+      "allowedOperators": [
+        "in"
+      ],
+      "requiredSelf": false,
+      "sensitive": false,
+      "sourceItem": "现居地",
+      "note": "不收精确地址。宏观区域展开为互斥叶子集合，重复项去重后求和。",
+      "options": [
+        {
+          "id": "cn_shanghai",
+          "label": "中国大陆·上海"
+        },
+        {
+          "id": "cn_jiangsu",
+          "label": "中国大陆·江苏"
+        },
+        {
+          "id": "cn_zhejiang",
+          "label": "中国大陆·浙江"
+        },
+        {
+          "id": "cn_beijing",
+          "label": "中国大陆·北京"
+        },
+        {
+          "id": "cn_guangdong",
+          "label": "中国大陆·广东"
+        },
+        {
+          "id": "cn_other",
+          "label": "中国大陆·其他"
+        },
+        {
+          "id": "jp_tokyo",
+          "label": "日本·东京"
+        },
+        {
+          "id": "jp_kanagawa",
+          "label": "日本·神奈川"
+        },
+        {
+          "id": "jp_saitama",
+          "label": "日本·埼玉"
+        },
+        {
+          "id": "jp_chiba",
+          "label": "日本·千叶"
+        },
+        {
+          "id": "jp_osaka",
+          "label": "日本·大阪"
+        },
+        {
+          "id": "jp_other",
+          "label": "日本·其他"
+        },
+        {
+          "id": "world_other",
+          "label": "其他地区"
+        }
+      ],
+      "presets": [
+        {
+          "id": "tokyo",
+          "label": "东京",
+          "values": [
+            "jp_tokyo"
+          ]
+        },
+        {
+          "id": "tokyo_metro",
+          "label": "一都三县",
+          "values": [
+            "jp_tokyo",
+            "jp_kanagawa",
+            "jp_saitama",
+            "jp_chiba"
+          ]
+        },
+        {
+          "id": "japan",
+          "label": "日本全域",
+          "values": [
+            "jp_tokyo",
+            "jp_kanagawa",
+            "jp_saitama",
+            "jp_chiba",
+            "jp_osaka",
+            "jp_other"
+          ]
+        },
+        {
+          "id": "jiangzhehu",
+          "label": "江浙沪",
+          "values": [
+            "cn_shanghai",
+            "cn_jiangsu",
+            "cn_zhejiang"
+          ]
+        },
+        {
+          "id": "mainland",
+          "label": "中国大陆全域",
+          "values": [
+            "cn_shanghai",
+            "cn_jiangsu",
+            "cn_zhejiang",
+            "cn_beijing",
+            "cn_guangdong",
+            "cn_other"
+          ]
+        }
+      ],
+      "scoreEnabled": false
+    },
+    {
+      "id": "hukou",
+      "label": "户籍",
+      "group": "basic",
+      "kind": "enum",
+      "selfControl": "single_choice",
+      "requirementControl": "acceptable_multi_choice",
+      "allowedOperators": [
+        "in"
+      ],
+      "requiredSelf": false,
+      "sensitive": false,
+      "sourceItem": "户籍",
+      "note": "本字段明确指中国大陆户籍；不适用是一种已回答值，不是未填写。",
+      "options": [
+        {
+          "id": "cn_shanghai",
+          "label": "上海"
+        },
+        {
+          "id": "cn_jiangsu",
+          "label": "江苏"
+        },
+        {
+          "id": "cn_zhejiang",
+          "label": "浙江"
+        },
+        {
+          "id": "cn_beijing",
+          "label": "北京"
+        },
+        {
+          "id": "cn_guangdong",
+          "label": "广东"
+        },
+        {
+          "id": "cn_other",
+          "label": "中国大陆其他"
+        },
+        {
+          "id": "not_applicable",
+          "label": "不适用：中国大陆户籍之外"
+        }
+      ],
+      "presets": [
+        {
+          "id": "jiangzhehu",
+          "label": "江浙沪",
+          "values": [
+            "cn_shanghai",
+            "cn_jiangsu",
+            "cn_zhejiang"
+          ]
+        },
+        {
+          "id": "mainland",
+          "label": "中国大陆户籍",
+          "values": [
+            "cn_shanghai",
+            "cn_jiangsu",
+            "cn_zhejiang",
+            "cn_beijing",
+            "cn_guangdong",
+            "cn_other"
+          ]
+        }
+      ],
+      "scoreEnabled": false
+    },
+    {
+      "id": "marital_status",
+      "label": "婚姻状况",
+      "group": "basic",
+      "kind": "enum",
+      "selfControl": "single_choice",
+      "requirementControl": "acceptable_multi_choice",
+      "allowedOperators": [
+        "in"
+      ],
+      "requiredSelf": false,
+      "sensitive": true,
+      "sourceItem": "婚否",
+      "note": "初始不限，不暗中筛除已婚；产品只估算，不提供撮合。",
+      "options": [
+        {
+          "id": "never_married",
+          "label": "未婚"
+        },
+        {
+          "id": "divorced_no_children",
+          "label": "离异无子女"
+        },
+        {
+          "id": "divorced_with_children",
+          "label": "离异有子女"
+        },
+        {
+          "id": "widowed",
+          "label": "丧偶"
+        },
+        {
+          "id": "married",
+          "label": "已婚"
+        }
+      ],
+      "presets": [],
+      "scoreEnabled": false
+    },
+    {
+      "id": "relationship_count",
+      "label": "恋爱经历",
+      "group": "romance",
+      "kind": "enum",
+      "selfControl": "single_choice",
+      "requirementControl": "acceptable_multi_choice",
+      "allowedOperators": [
+        "in"
+      ],
+      "requiredSelf": false,
+      "sensitive": true,
+      "sourceItem": "恋爱史／恋爱经历",
+      "note": "",
+      "options": [
+        {
+          "id": "zero",
+          "label": "0次"
+        },
+        {
+          "id": "one",
+          "label": "1次"
+        },
+        {
+          "id": "two_three",
+          "label": "2～3次"
+        },
+        {
+          "id": "four_plus",
+          "label": "4次及以上"
+        }
+      ],
+      "presets": [],
+      "scoreEnabled": false
+    },
+    {
+      "id": "cohabitation",
+      "label": "同居经历",
+      "group": "romance",
+      "kind": "enum",
+      "selfControl": "single_choice",
+      "requirementControl": "acceptable_multi_choice",
+      "allowedOperators": [
+        "in"
+      ],
+      "requiredSelf": false,
+      "sensitive": true,
+      "sourceItem": "恋爱史／同居经历",
+      "note": "",
+      "options": [
+        {
+          "id": "never",
+          "label": "无"
+        },
+        {
+          "id": "past",
+          "label": "曾经有"
+        },
+        {
+          "id": "current",
+          "label": "目前有"
+        }
+      ],
+      "presets": [],
+      "scoreEnabled": false
+    },
+    {
+      "id": "height_cm",
+      "label": "身高",
+      "group": "appearance",
+      "kind": "number",
+      "selfControl": "number_or_preset",
+      "requirementControl": "preset_or_select_range",
+      "allowedOperators": [
+        "gte",
+        "lte",
+        "between",
+        "relative"
+      ],
+      "requiredSelf": false,
+      "sensitive": false,
+      "sourceItem": "身高",
+      "note": "不计算BMI或医疗健康分。",
+      "unit": "cm",
+      "minimum": 120,
+      "maximum": 220,
+      "step": 1,
+      "presets": [
+        {
+          "label": "160cm及以上",
+          "op": "gte",
+          "value": 160
+        },
+        {
+          "label": "170cm及以上",
+          "op": "gte",
+          "value": 170
+        },
+        {
+          "label": "175cm及以上",
+          "op": "gte",
+          "value": 175
+        },
+        {
+          "label": "180cm及以上",
+          "op": "gte",
+          "value": 180
+        }
+      ],
+      "relativePresets": [
+        {
+          "label": "不低于我的身高",
+          "operator": "gte",
+          "offset": 0
+        }
+      ],
+      "scoreEnabled": false
+    },
+    {
+      "id": "weight_kg",
+      "label": "体重",
+      "group": "appearance",
+      "kind": "number",
+      "selfControl": "number_or_preset",
+      "requirementControl": "preset_or_select_range",
+      "allowedOperators": [
+        "gte",
+        "lte",
+        "between"
+      ],
+      "requiredSelf": false,
+      "sensitive": false,
+      "sourceItem": "体重",
+      "note": "不把体重机械解释为健康水平，不参与综合评分。",
+      "unit": "kg",
+      "minimum": 30,
+      "maximum": 250,
+      "step": 1,
+      "presets": [
+        {
+          "label": "45～60kg",
+          "op": "between",
+          "min": 45,
+          "max": 60
+        },
+        {
+          "label": "55～75kg",
+          "op": "between",
+          "min": 55,
+          "max": 75
+        },
+        {
+          "label": "80kg及以下",
+          "op": "lte",
+          "value": 80
+        }
+      ],
+      "relativePresets": [],
+      "scoreEnabled": false
+    },
+    {
+      "id": "appearance",
+      "label": "颜值自评／要求",
+      "group": "appearance",
+      "kind": "enum",
+      "selfControl": "single_choice",
+      "requirementControl": "acceptable_multi_choice",
+      "allowedOperators": [
+        "in"
+      ],
+      "requiredSelf": false,
+      "sensitive": false,
+      "sourceItem": "颜值／自评",
+      "note": "主观演示档位；不上传照片、不进行AI评分。要求支持“至少X档”，展开为可接受集合。",
+      "options": [
+        {
+          "id": "level_1",
+          "label": "1档"
+        },
+        {
+          "id": "level_2",
+          "label": "2档"
+        },
+        {
+          "id": "level_3",
+          "label": "3档"
+        },
+        {
+          "id": "level_4",
+          "label": "4档"
+        },
+        {
+          "id": "level_5",
+          "label": "5档"
+        }
+      ],
+      "presets": [],
+      "scoreEnabled": true
+    },
+    {
+      "id": "university_tier",
+      "label": "院校背景",
+      "group": "education",
+      "kind": "enum",
+      "selfControl": "single_choice",
+      "requirementControl": "acceptable_multi_choice",
+      "allowedOperators": [
+        "in"
+      ],
+      "requiredSelf": false,
+      "sensitive": false,
+      "sourceItem": "学校",
+      "note": "仅为用户熟悉的演示分类，不宣称现代录取批次的普遍适用性；海外单列且分值是可改占位值。211与985的底层类别互斥。",
+      "options": [
+        {
+          "id": "regular_or_below",
+          "label": "二本及以下"
+        },
+        {
+          "id": "first_tier_non211",
+          "label": "一本（非211／985）"
+        },
+        {
+          "id": "211_non985",
+          "label": "211（非985）"
+        },
+        {
+          "id": "985",
+          "label": "985"
+        },
+        {
+          "id": "overseas",
+          "label": "海外院校（单列）"
+        }
+      ],
+      "presets": [
+        {
+          "id": "first_tier_plus",
+          "label": "一本及以上（国内分类）",
+          "values": [
+            "first_tier_non211",
+            "211_non985",
+            "985"
+          ]
+        },
+        {
+          "id": "211_plus",
+          "label": "211及以上（国内分类）",
+          "values": [
+            "211_non985",
+            "985"
+          ]
+        },
+        {
+          "id": "985_only",
+          "label": "仅985",
+          "values": [
+            "985"
+          ]
+        }
+      ],
+      "scoreEnabled": true
+    },
+    {
+      "id": "education",
+      "label": "最高学历",
+      "group": "education",
+      "kind": "enum",
+      "selfControl": "single_choice",
+      "requirementControl": "acceptable_multi_choice",
+      "allowedOperators": [
+        "in"
+      ],
+      "requiredSelf": false,
+      "sensitive": false,
+      "sourceItem": "学历",
+      "note": "",
+      "options": [
+        {
+          "id": "high_school_or_below",
+          "label": "高中及以下"
+        },
+        {
+          "id": "associate",
+          "label": "专科"
+        },
+        {
+          "id": "bachelor",
+          "label": "本科"
+        },
+        {
+          "id": "master",
+          "label": "硕士"
+        },
+        {
+          "id": "doctor",
+          "label": "博士"
+        }
+      ],
+      "presets": [
+        {
+          "id": "bachelor_plus",
+          "label": "本科及以上",
+          "values": [
+            "bachelor",
+            "master",
+            "doctor"
+          ]
+        },
+        {
+          "id": "master_plus",
+          "label": "硕士及以上",
+          "values": [
+            "master",
+            "doctor"
+          ]
+        },
+        {
+          "id": "doctor_only",
+          "label": "博士",
+          "values": [
+            "doctor"
+          ]
+        }
+      ],
+      "scoreEnabled": true
+    },
+    {
+      "id": "home",
+      "label": "个人名下婚房",
+      "group": "career",
+      "kind": "enum",
+      "selfControl": "single_choice",
+      "requirementControl": "acceptable_multi_choice",
+      "allowedOperators": [
+        "in"
+      ],
+      "requiredSelf": false,
+      "sensitive": false,
+      "sourceItem": "个人名下婚房",
+      "note": "婚房按能否用于婚后居住且个人名下定义；不推断房屋价值。",
+      "options": [
+        {
+          "id": "none",
+          "label": "无"
+        },
+        {
+          "id": "mortgaged",
+          "label": "有，尚有房贷"
+        },
+        {
+          "id": "paid_off",
+          "label": "有，已无房贷"
+        }
+      ],
+      "presets": [],
+      "scoreEnabled": true
+    },
+    {
+      "id": "car",
+      "label": "个人名下汽车",
+      "group": "career",
+      "kind": "enum",
+      "selfControl": "single_choice",
+      "requirementControl": "acceptable_multi_choice",
+      "allowedOperators": [
+        "in"
+      ],
+      "requiredSelf": false,
+      "sensitive": false,
+      "sourceItem": "个人名下汽车",
+      "note": "",
+      "options": [
+        {
+          "id": "none",
+          "label": "无"
+        },
+        {
+          "id": "financed",
+          "label": "有，尚有车贷"
+        },
+        {
+          "id": "paid_off",
+          "label": "有，已无车贷"
+        }
+      ],
+      "presets": [],
+      "scoreEnabled": true
+    },
+    {
+      "id": "other_assets_cny",
+      "label": "其他大额资产",
+      "group": "career",
+      "kind": "number",
+      "selfControl": "number_or_preset",
+      "requirementControl": "preset_or_select_range",
+      "allowedOperators": [
+        "gte",
+        "lte",
+        "between"
+      ],
+      "requiredSelf": false,
+      "sensitive": true,
+      "sourceItem": "个人名下其他大额资产",
+      "note": "排除已单列的婚房、汽车和存款／证券；保存原币种和统一计算金额。",
+      "unit": "CNY",
+      "minimum": 0,
+      "maximum": 100000000,
+      "step": 1,
+      "presets": [
+        {
+          "label": "10万元人民币及以上",
+          "op": "gte",
+          "value": 100000
+        },
+        {
+          "label": "50万元人民币及以上",
+          "op": "gte",
+          "value": 500000
+        },
+        {
+          "label": "100万元人民币及以上",
+          "op": "gte",
+          "value": 1000000
+        }
+      ],
+      "relativePresets": [],
+      "scoreEnabled": true
+    },
+    {
+      "id": "debt_cny",
+      "label": "个人名下贷款余额",
+      "group": "career",
+      "kind": "number",
+      "selfControl": "number_or_preset",
+      "requirementControl": "preset_or_select_range",
+      "allowedOperators": [
+        "gte",
+        "lte",
+        "between"
+      ],
+      "requiredSelf": false,
+      "sensitive": true,
+      "sourceItem": "个人名下贷款",
+      "note": "包含房贷车贷；与资产相关性先不校准，不能把占位分当作专业财务评估。",
+      "unit": "CNY",
+      "minimum": 0,
+      "maximum": 100000000,
+      "step": 1,
+      "presets": [
+        {
+          "label": "无贷款",
+          "op": "lte",
+          "value": 0
+        },
+        {
+          "label": "10万元人民币以内",
+          "op": "lte",
+          "value": 100000
+        },
+        {
+          "label": "50万元人民币以内",
+          "op": "lte",
+          "value": 500000
+        }
+      ],
+      "relativePresets": [],
+      "scoreEnabled": true
+    },
+    {
+      "id": "occupation",
+      "label": "工作类别",
+      "group": "career",
+      "kind": "enum",
+      "selfControl": "single_choice",
+      "requirementControl": "acceptable_multi_choice",
+      "allowedOperators": [
+        "in"
+      ],
+      "requiredSelf": false,
+      "sensitive": false,
+      "sourceItem": "工作类别",
+      "note": "不收单位名称；职业类别本身不排序评分。",
+      "options": [
+        {
+          "id": "student",
+          "label": "在读"
+        },
+        {
+          "id": "it_engineering",
+          "label": "IT／工程技术"
+        },
+        {
+          "id": "professional",
+          "label": "专业服务"
+        },
+        {
+          "id": "education_research",
+          "label": "教育／科研"
+        },
+        {
+          "id": "public_sector",
+          "label": "公共部门"
+        },
+        {
+          "id": "business_office",
+          "label": "企业职员"
+        },
+        {
+          "id": "service_trade",
+          "label": "服务／技工"
+        },
+        {
+          "id": "self_employed",
+          "label": "自由职业／自营"
+        },
+        {
+          "id": "not_working",
+          "label": "暂未工作"
+        },
+        {
+          "id": "retired",
+          "label": "退休"
+        },
+        {
+          "id": "other",
+          "label": "其他"
+        }
+      ],
+      "presets": [],
+      "scoreEnabled": false
+    },
+    {
+      "id": "annual_income_cny",
+      "label": "税前年收入",
+      "group": "career",
+      "kind": "number",
+      "selfControl": "number_or_preset",
+      "requirementControl": "preset_or_select_range",
+      "allowedOperators": [
+        "gte",
+        "lte",
+        "between",
+        "relative"
+      ],
+      "requiredSelf": false,
+      "sensitive": true,
+      "sourceItem": "薪资",
+      "note": "人民币／日元可切换；统一税前年收入，不混月薪、税后收入。",
+      "unit": "CNY/year",
+      "minimum": 0,
+      "maximum": 100000000,
+      "step": 1,
+      "presets": [
+        {
+          "label": "12万元人民币及以上",
+          "op": "gte",
+          "value": 120000
+        },
+        {
+          "label": "24万元人民币及以上",
+          "op": "gte",
+          "value": 240000
+        },
+        {
+          "label": "50万元人民币及以上",
+          "op": "gte",
+          "value": 500000
+        },
+        {
+          "label": "100万元人民币及以上",
+          "op": "gte",
+          "value": 1000000
+        }
+      ],
+      "relativePresets": [
+        {
+          "label": "不低于我的年收入",
+          "operator": "gte",
+          "offset": 0
+        }
+      ],
+      "scoreEnabled": true
+    },
+    {
+      "id": "job_stability",
+      "label": "职业稳定性自评",
+      "group": "career",
+      "kind": "enum",
+      "selfControl": "single_choice",
+      "requirementControl": "acceptable_multi_choice",
+      "allowedOperators": [
+        "in"
+      ],
+      "requiredSelf": false,
+      "sensitive": false,
+      "sourceItem": "职业稳定性与行业风险",
+      "note": "",
+      "options": [
+        {
+          "id": "high_volatility",
+          "label": "波动较大"
+        },
+        {
+          "id": "medium",
+          "label": "一般"
+        },
+        {
+          "id": "stable",
+          "label": "相对稳定"
+        }
+      ],
+      "presets": [],
+      "scoreEnabled": true
+    },
+    {
+      "id": "career_plan",
+      "label": "职业规划自评",
+      "group": "career",
+      "kind": "enum",
+      "selfControl": "single_choice",
+      "requirementControl": "acceptable_multi_choice",
+      "allowedOperators": [
+        "in"
+      ],
+      "requiredSelf": false,
+      "sensitive": false,
+      "sourceItem": "个人职业规划与抗风险能力",
+      "note": "",
+      "options": [
+        {
+          "id": "exploring",
+          "label": "正在探索"
+        },
+        {
+          "id": "some_plan",
+          "label": "有大致方向"
+        },
+        {
+          "id": "clear_plan",
+          "label": "有明确计划"
+        }
+      ],
+      "presets": [],
+      "scoreEnabled": true
+    },
+    {
+      "id": "risk_buffer",
+      "label": "收入中断可支撑时长",
+      "group": "career",
+      "kind": "enum",
+      "selfControl": "single_choice",
+      "requirementControl": "acceptable_multi_choice",
+      "allowedOperators": [
+        "in"
+      ],
+      "requiredSelf": false,
+      "sensitive": false,
+      "sourceItem": "个人职业规划与抗风险能力",
+      "note": "自评生活缓冲时间；不由存款自动推断。",
+      "options": [
+        {
+          "id": "under_3m",
+          "label": "不足3个月"
+        },
+        {
+          "id": "3_6m",
+          "label": "3～6个月"
+        },
+        {
+          "id": "6_12m",
+          "label": "6～12个月"
+        },
+        {
+          "id": "12m_plus",
+          "label": "12个月及以上"
+        }
+      ],
+      "presets": [],
+      "scoreEnabled": true
+    },
+    {
+      "id": "financial_assets_cny",
+      "label": "存款与有价证券",
+      "group": "career",
+      "kind": "number",
+      "selfControl": "number_or_preset",
+      "requirementControl": "preset_or_select_range",
+      "allowedOperators": [
+        "gte",
+        "lte",
+        "between"
+      ],
+      "requiredSelf": false,
+      "sensitive": true,
+      "sourceItem": "存款（含有价证券）",
+      "note": "采用当前估计值；不输入账户或持仓明细。",
+      "unit": "CNY",
+      "minimum": 0,
+      "maximum": 100000000,
+      "step": 1,
+      "presets": [
+        {
+          "label": "10万元人民币及以上",
+          "op": "gte",
+          "value": 100000
+        },
+        {
+          "label": "50万元人民币及以上",
+          "op": "gte",
+          "value": 500000
+        },
+        {
+          "label": "100万元人民币及以上",
+          "op": "gte",
+          "value": 1000000
+        }
+      ],
+      "relativePresets": [],
+      "scoreEnabled": true
+    },
+    {
+      "id": "sociability",
+      "label": "性格：内外向倾向",
+      "group": "lifestyle",
+      "kind": "enum",
+      "selfControl": "single_choice",
+      "requirementControl": "acceptable_multi_choice",
+      "allowedOperators": [
+        "in"
+      ],
+      "requiredSelf": false,
+      "sensitive": false,
+      "sourceItem": "性格",
+      "note": "",
+      "options": [
+        {
+          "id": "introvert",
+          "label": "偏内向"
+        },
+        {
+          "id": "balanced",
+          "label": "中间型"
+        },
+        {
+          "id": "extrovert",
+          "label": "偏外向"
+        }
+      ],
+      "presets": [],
+      "scoreEnabled": false
+    },
+    {
+      "id": "routine",
+      "label": "作息习惯",
+      "group": "lifestyle",
+      "kind": "enum",
+      "selfControl": "single_choice",
+      "requirementControl": "acceptable_multi_choice",
+      "allowedOperators": [
+        "in"
+      ],
+      "requiredSelf": false,
+      "sensitive": false,
+      "sourceItem": "习惯／生活习惯兼容度",
+      "note": "",
+      "options": [
+        {
+          "id": "early",
+          "label": "偏早睡早起"
+        },
+        {
+          "id": "regular",
+          "label": "作息较规律"
+        },
+        {
+          "id": "late",
+          "label": "偏晚睡晚起"
+        },
+        {
+          "id": "variable",
+          "label": "不固定"
+        }
+      ],
+      "presets": [],
+      "scoreEnabled": false
+    },
+    {
+      "id": "social_frequency",
+      "label": "社交频率",
+      "group": "lifestyle",
+      "kind": "enum",
+      "selfControl": "single_choice",
+      "requirementControl": "acceptable_multi_choice",
+      "allowedOperators": [
+        "in"
+      ],
+      "requiredSelf": false,
+      "sensitive": false,
+      "sourceItem": "习惯",
+      "note": "",
+      "options": [
+        {
+          "id": "low",
+          "label": "较少"
+        },
+        {
+          "id": "medium",
+          "label": "适中"
+        },
+        {
+          "id": "high",
+          "label": "较多"
+        }
+      ],
+      "presets": [],
+      "scoreEnabled": false
+    },
+    {
+      "id": "hobbies",
+      "label": "爱好",
+      "group": "lifestyle",
+      "kind": "tags",
+      "selfControl": "multi_choice",
+      "requirementControl": "acceptable_multi_choice",
+      "allowedOperators": [
+        "any_of"
+      ],
+      "requiredSelf": false,
+      "sensitive": false,
+      "sourceItem": "爱好",
+      "note": "自己可多选；对方勾选多个表示至少有其中一个爱好，不要求全部具备。",
+      "options": [
+        {
+          "id": "sports",
+          "label": "运动"
+        },
+        {
+          "id": "reading",
+          "label": "阅读"
+        },
+        {
+          "id": "gaming",
+          "label": "游戏"
+        },
+        {
+          "id": "travel",
+          "label": "旅行"
+        },
+        {
+          "id": "music",
+          "label": "音乐"
+        },
+        {
+          "id": "cooking",
+          "label": "烹饪"
+        },
+        {
+          "id": "film",
+          "label": "影视"
+        },
+        {
+          "id": "outdoors",
+          "label": "户外"
+        }
+      ],
+      "presets": [],
+      "scoreEnabled": false
+    },
+    {
+      "id": "smoking",
+      "label": "吸烟情况",
+      "group": "lifestyle",
+      "kind": "enum",
+      "selfControl": "single_choice",
+      "requirementControl": "acceptable_multi_choice",
+      "allowedOperators": [
+        "in"
+      ],
+      "requiredSelf": false,
+      "sensitive": true,
+      "sourceItem": "不良嗜好／烟瘾",
+      "note": "",
+      "options": [
+        {
+          "id": "none",
+          "label": "不吸烟"
+        },
+        {
+          "id": "occasional",
+          "label": "偶尔"
+        },
+        {
+          "id": "regular",
+          "label": "经常"
+        }
+      ],
+      "presets": [],
+      "scoreEnabled": false
+    },
+    {
+      "id": "drinking",
+      "label": "饮酒情况",
+      "group": "lifestyle",
+      "kind": "enum",
+      "selfControl": "single_choice",
+      "requirementControl": "acceptable_multi_choice",
+      "allowedOperators": [
+        "in"
+      ],
+      "requiredSelf": false,
+      "sensitive": true,
+      "sourceItem": "不良嗜好／酗酒",
+      "note": "不做临床诊断。",
+      "options": [
+        {
+          "id": "none",
+          "label": "不饮酒"
+        },
+        {
+          "id": "occasional",
+          "label": "偶尔"
+        },
+        {
+          "id": "frequent",
+          "label": "经常"
+        },
+        {
+          "id": "problematic_self_report",
+          "label": "自述有失控饮酒问题"
+        }
+      ],
+      "presets": [],
+      "scoreEnabled": false
+    },
+    {
+      "id": "gambling",
+      "label": "赌博相关情况",
+      "group": "lifestyle",
+      "kind": "enum",
+      "selfControl": "single_choice",
+      "requirementControl": "acceptable_multi_choice",
+      "allowedOperators": [
+        "in"
+      ],
+      "requiredSelf": false,
+      "sensitive": true,
+      "sourceItem": "不良嗜好／赌",
+      "note": "",
+      "options": [
+        {
+          "id": "none",
+          "label": "无"
+        },
+        {
+          "id": "past",
+          "label": "过去有，目前无"
+        },
+        {
+          "id": "current",
+          "label": "目前有"
+        }
+      ],
+      "presets": [],
+      "scoreEnabled": false
+    },
+    {
+      "id": "drug_use",
+      "label": "毒品使用经历",
+      "group": "lifestyle",
+      "kind": "enum",
+      "selfControl": "single_choice",
+      "requirementControl": "acceptable_multi_choice",
+      "allowedOperators": [
+        "in"
+      ],
+      "requiredSelf": false,
+      "sensitive": true,
+      "sourceItem": "不良嗜好／毒",
+      "note": "只收类别，不收具体违法细节；不参与评分。",
+      "options": [
+        {
+          "id": "none",
+          "label": "无"
+        },
+        {
+          "id": "past",
+          "label": "过去有，目前无"
+        },
+        {
+          "id": "current",
+          "label": "目前有"
+        }
+      ],
+      "presets": [],
+      "scoreEnabled": false
+    },
+    {
+      "id": "parents_pension_cny",
+      "label": "父母养老金合计（月）",
+      "group": "family",
+      "kind": "number",
+      "selfControl": "number_or_preset",
+      "requirementControl": "preset_or_select_range",
+      "allowedOperators": [
+        "gte",
+        "lte",
+        "between"
+      ],
+      "requiredSelf": false,
+      "sensitive": true,
+      "sourceItem": "父母养老金",
+      "note": "含公共养老金与稳定退休金；按合计月额，不适用可跳过。",
+      "unit": "CNY/month",
+      "minimum": 0,
+      "maximum": 100000,
+      "step": 1,
+      "presets": [
+        {
+          "label": "2000元人民币及以上",
+          "op": "gte",
+          "value": 2000
+        },
+        {
+          "label": "5000元人民币及以上",
+          "op": "gte",
+          "value": 5000
+        },
+        {
+          "label": "1万元人民币及以上",
+          "op": "gte",
+          "value": 10000
+        }
+      ],
+      "relativePresets": [],
+      "scoreEnabled": false
+    },
+    {
+      "id": "father_age",
+      "label": "父亲年龄段",
+      "group": "family",
+      "kind": "enum",
+      "selfControl": "single_choice",
+      "requirementControl": "acceptable_multi_choice",
+      "allowedOperators": [
+        "in"
+      ],
+      "requiredSelf": false,
+      "sensitive": true,
+      "sourceItem": "父亲／年龄段",
+      "note": "",
+      "options": [
+        {
+          "id": "under_50",
+          "label": "50岁以下"
+        },
+        {
+          "id": "50_59",
+          "label": "50～59岁"
+        },
+        {
+          "id": "60_69",
+          "label": "60～69岁"
+        },
+        {
+          "id": "70_plus",
+          "label": "70岁及以上"
+        },
+        {
+          "id": "deceased",
+          "label": "已故"
+        },
+        {
+          "id": "not_known",
+          "label": "不清楚／不适用"
+        }
+      ],
+      "presets": [],
+      "scoreEnabled": false
+    },
+    {
+      "id": "father_education",
+      "label": "父亲学历",
+      "group": "family",
+      "kind": "enum",
+      "selfControl": "single_choice",
+      "requirementControl": "acceptable_multi_choice",
+      "allowedOperators": [
+        "in"
+      ],
+      "requiredSelf": false,
+      "sensitive": true,
+      "sourceItem": "父亲／学历",
+      "note": "",
+      "options": [
+        {
+          "id": "high_school_or_below",
+          "label": "高中及以下"
+        },
+        {
+          "id": "associate",
+          "label": "专科"
+        },
+        {
+          "id": "bachelor",
+          "label": "本科"
+        },
+        {
+          "id": "master",
+          "label": "硕士"
+        },
+        {
+          "id": "doctor",
+          "label": "博士"
+        },
+        {
+          "id": "not_known",
+          "label": "不清楚／不适用"
+        }
+      ],
+      "presets": [],
+      "scoreEnabled": false
+    },
+    {
+      "id": "father_occupation",
+      "label": "父亲工作类别",
+      "group": "family",
+      "kind": "enum",
+      "selfControl": "single_choice",
+      "requirementControl": "acceptable_multi_choice",
+      "allowedOperators": [
+        "in"
+      ],
+      "requiredSelf": false,
+      "sensitive": true,
+      "sourceItem": "父亲／工作",
+      "note": "",
+      "options": [
+        {
+          "id": "student",
+          "label": "在读"
+        },
+        {
+          "id": "it_engineering",
+          "label": "IT／工程技术"
+        },
+        {
+          "id": "professional",
+          "label": "专业服务"
+        },
+        {
+          "id": "education_research",
+          "label": "教育／科研"
+        },
+        {
+          "id": "public_sector",
+          "label": "公共部门"
+        },
+        {
+          "id": "business_office",
+          "label": "企业职员"
+        },
+        {
+          "id": "service_trade",
+          "label": "服务／技工"
+        },
+        {
+          "id": "self_employed",
+          "label": "自由职业／自营"
+        },
+        {
+          "id": "not_working",
+          "label": "暂未工作"
+        },
+        {
+          "id": "retired",
+          "label": "退休"
+        },
+        {
+          "id": "other",
+          "label": "其他"
+        },
+        {
+          "id": "not_known",
+          "label": "不清楚／不适用"
+        }
+      ],
+      "presets": [],
+      "scoreEnabled": false
+    },
+    {
+      "id": "father_marital",
+      "label": "父亲婚姻情况",
+      "group": "family",
+      "kind": "enum",
+      "selfControl": "single_choice",
+      "requirementControl": "acceptable_multi_choice",
+      "allowedOperators": [
+        "in"
+      ],
+      "requiredSelf": false,
+      "sensitive": true,
+      "sourceItem": "父亲／离异与否",
+      "note": "",
+      "options": [
+        {
+          "id": "married",
+          "label": "已婚"
+        },
+        {
+          "id": "divorced",
+          "label": "离异"
+        },
+        {
+          "id": "widowed",
+          "label": "丧偶"
+        },
+        {
+          "id": "other",
+          "label": "其他／不适用"
+        }
+      ],
+      "presets": [],
+      "scoreEnabled": false
+    },
+    {
+      "id": "mother_age",
+      "label": "母亲年龄段",
+      "group": "family",
+      "kind": "enum",
+      "selfControl": "single_choice",
+      "requirementControl": "acceptable_multi_choice",
+      "allowedOperators": [
+        "in"
+      ],
+      "requiredSelf": false,
+      "sensitive": true,
+      "sourceItem": "母亲／年龄段",
+      "note": "",
+      "options": [
+        {
+          "id": "under_50",
+          "label": "50岁以下"
+        },
+        {
+          "id": "50_59",
+          "label": "50～59岁"
+        },
+        {
+          "id": "60_69",
+          "label": "60～69岁"
+        },
+        {
+          "id": "70_plus",
+          "label": "70岁及以上"
+        },
+        {
+          "id": "deceased",
+          "label": "已故"
+        },
+        {
+          "id": "not_known",
+          "label": "不清楚／不适用"
+        }
+      ],
+      "presets": [],
+      "scoreEnabled": false
+    },
+    {
+      "id": "mother_education",
+      "label": "母亲学历",
+      "group": "family",
+      "kind": "enum",
+      "selfControl": "single_choice",
+      "requirementControl": "acceptable_multi_choice",
+      "allowedOperators": [
+        "in"
+      ],
+      "requiredSelf": false,
+      "sensitive": true,
+      "sourceItem": "母亲／学历",
+      "note": "",
+      "options": [
+        {
+          "id": "high_school_or_below",
+          "label": "高中及以下"
+        },
+        {
+          "id": "associate",
+          "label": "专科"
+        },
+        {
+          "id": "bachelor",
+          "label": "本科"
+        },
+        {
+          "id": "master",
+          "label": "硕士"
+        },
+        {
+          "id": "doctor",
+          "label": "博士"
+        },
+        {
+          "id": "not_known",
+          "label": "不清楚／不适用"
+        }
+      ],
+      "presets": [],
+      "scoreEnabled": false
+    },
+    {
+      "id": "mother_occupation",
+      "label": "母亲工作类别",
+      "group": "family",
+      "kind": "enum",
+      "selfControl": "single_choice",
+      "requirementControl": "acceptable_multi_choice",
+      "allowedOperators": [
+        "in"
+      ],
+      "requiredSelf": false,
+      "sensitive": true,
+      "sourceItem": "母亲／工作",
+      "note": "",
+      "options": [
+        {
+          "id": "student",
+          "label": "在读"
+        },
+        {
+          "id": "it_engineering",
+          "label": "IT／工程技术"
+        },
+        {
+          "id": "professional",
+          "label": "专业服务"
+        },
+        {
+          "id": "education_research",
+          "label": "教育／科研"
+        },
+        {
+          "id": "public_sector",
+          "label": "公共部门"
+        },
+        {
+          "id": "business_office",
+          "label": "企业职员"
+        },
+        {
+          "id": "service_trade",
+          "label": "服务／技工"
+        },
+        {
+          "id": "self_employed",
+          "label": "自由职业／自营"
+        },
+        {
+          "id": "not_working",
+          "label": "暂未工作"
+        },
+        {
+          "id": "retired",
+          "label": "退休"
+        },
+        {
+          "id": "other",
+          "label": "其他"
+        },
+        {
+          "id": "not_known",
+          "label": "不清楚／不适用"
+        }
+      ],
+      "presets": [],
+      "scoreEnabled": false
+    },
+    {
+      "id": "mother_marital",
+      "label": "母亲婚姻情况",
+      "group": "family",
+      "kind": "enum",
+      "selfControl": "single_choice",
+      "requirementControl": "acceptable_multi_choice",
+      "allowedOperators": [
+        "in"
+      ],
+      "requiredSelf": false,
+      "sensitive": true,
+      "sourceItem": "母亲／离异与否",
+      "note": "",
+      "options": [
+        {
+          "id": "married",
+          "label": "已婚"
+        },
+        {
+          "id": "divorced",
+          "label": "离异"
+        },
+        {
+          "id": "widowed",
+          "label": "丧偶"
+        },
+        {
+          "id": "other",
+          "label": "其他／不适用"
+        }
+      ],
+      "presets": [],
+      "scoreEnabled": false
+    },
+    {
+      "id": "only_child",
+      "label": "是否独生子女",
+      "group": "family",
+      "kind": "enum",
+      "selfControl": "single_choice",
+      "requirementControl": "acceptable_multi_choice",
+      "allowedOperators": [
+        "in"
+      ],
+      "requiredSelf": false,
+      "sensitive": false,
+      "sourceItem": "是否独生子",
+      "note": "",
+      "options": [
+        {
+          "id": "yes",
+          "label": "是"
+        },
+        {
+          "id": "no",
+          "label": "否"
+        }
+      ],
+      "presets": [],
+      "scoreEnabled": false
+    },
+    {
+      "id": "family_net_assets_cny",
+      "label": "家庭净资产",
+      "group": "family",
+      "kind": "number",
+      "selfControl": "number_or_preset",
+      "requirementControl": "preset_or_select_range",
+      "allowedOperators": [
+        "gte",
+        "lte",
+        "between"
+      ],
+      "requiredSelf": false,
+      "sensitive": true,
+      "sourceItem": "家庭净资产",
+      "note": "原生家庭资产减债务的粗略合计，允许为负；不参与初版评分，避免与个人资产重复排名。",
+      "unit": "CNY",
+      "minimum": -100000000,
+      "maximum": 100000000,
+      "step": 1,
+      "presets": [
+        {
+          "label": "10万元人民币及以上",
+          "op": "gte",
+          "value": 100000
+        },
+        {
+          "label": "50万元人民币及以上",
+          "op": "gte",
+          "value": 500000
+        },
+        {
+          "label": "100万元人民币及以上",
+          "op": "gte",
+          "value": 1000000
+        }
+      ],
+      "relativePresets": [],
+      "scoreEnabled": false
+    },
+    {
+      "id": "live_with_parents",
+      "label": "婚后与父母同住意向",
+      "group": "family",
+      "kind": "enum",
+      "selfControl": "single_choice",
+      "requirementControl": "acceptable_multi_choice",
+      "allowedOperators": [
+        "in"
+      ],
+      "requiredSelf": false,
+      "sensitive": false,
+      "sourceItem": "原生家庭的边界感与相处模式",
+      "note": "",
+      "options": [
+        {
+          "id": "separate",
+          "label": "倾向分开居住"
+        },
+        {
+          "id": "same_home",
+          "label": "倾向同住"
+        },
+        {
+          "id": "flexible",
+          "label": "可协商"
+        }
+      ],
+      "presets": [],
+      "scoreEnabled": false
+    },
+    {
+      "id": "parent_involvement",
+      "label": "父母参与重大决定的方式",
+      "group": "family",
+      "kind": "enum",
+      "selfControl": "single_choice",
+      "requirementControl": "acceptable_multi_choice",
+      "allowedOperators": [
+        "in"
+      ],
+      "requiredSelf": false,
+      "sensitive": false,
+      "sourceItem": "原生家庭的边界感与相处模式",
+      "note": "",
+      "options": [
+        {
+          "id": "couple_decides",
+          "label": "夫妻自主决定"
+        },
+        {
+          "id": "consult",
+          "label": "听取建议后自主决定"
+        },
+        {
+          "id": "joint_family",
+          "label": "家庭共同决定"
+        }
+      ],
+      "presets": [],
+      "scoreEnabled": false
+    },
+    {
+      "id": "family_support",
+      "label": "对原生家庭经济支持安排",
+      "group": "family",
+      "kind": "enum",
+      "selfControl": "single_choice",
+      "requirementControl": "acceptable_multi_choice",
+      "allowedOperators": [
+        "in"
+      ],
+      "requiredSelf": false,
+      "sensitive": true,
+      "sourceItem": "原生家庭的边界感与相处模式",
+      "note": "",
+      "options": [
+        {
+          "id": "none_regular",
+          "label": "无固定支持"
+        },
+        {
+          "id": "regular",
+          "label": "有固定支持"
+        },
+        {
+          "id": "as_needed",
+          "label": "按需要协商"
+        }
+      ],
+      "presets": [],
+      "scoreEnabled": false
+    },
+    {
+      "id": "hereditary_history",
+      "label": "已知遗传病史情况",
+      "group": "longterm",
+      "kind": "enum",
+      "selfControl": "single_choice",
+      "requirementControl": "acceptable_multi_choice",
+      "allowedOperators": [
+        "in"
+      ],
+      "requiredSelf": false,
+      "sensitive": true,
+      "sourceItem": "遗传病史",
+      "note": "自述类别；不收疾病名称、不推断遗传风险、不参与评分。",
+      "options": [
+        {
+          "id": "none_known",
+          "label": "无已知情况"
+        },
+        {
+          "id": "known",
+          "label": "有已知情况"
+        },
+        {
+          "id": "unknown",
+          "label": "不清楚"
+        }
+      ],
+      "presets": [],
+      "scoreEnabled": false
+    },
+    {
+      "id": "spending_style",
+      "label": "消费与储蓄取向",
+      "group": "longterm",
+      "kind": "enum",
+      "selfControl": "single_choice",
+      "requirementControl": "acceptable_multi_choice",
+      "allowedOperators": [
+        "in"
+      ],
+      "requiredSelf": false,
+      "sensitive": false,
+      "sourceItem": "三观契合度",
+      "note": "不新增政治、宗教或意识形态评分。",
+      "options": [
+        {
+          "id": "save",
+          "label": "偏储蓄"
+        },
+        {
+          "id": "balanced",
+          "label": "平衡"
+        },
+        {
+          "id": "enjoy",
+          "label": "偏当下体验"
+        }
+      ],
+      "presets": [],
+      "scoreEnabled": false
+    },
+    {
+      "id": "household_roles",
+      "label": "家务分工意向",
+      "group": "longterm",
+      "kind": "enum",
+      "selfControl": "single_choice",
+      "requirementControl": "acceptable_multi_choice",
+      "allowedOperators": [
+        "in"
+      ],
+      "requiredSelf": false,
+      "sensitive": false,
+      "sourceItem": "三观契合度",
+      "note": "",
+      "options": [
+        {
+          "id": "equal",
+          "label": "尽量平均"
+        },
+        {
+          "id": "availability",
+          "label": "按时间能力分工"
+        },
+        {
+          "id": "other_agreement",
+          "label": "其他协商安排"
+        }
+      ],
+      "presets": [],
+      "scoreEnabled": false
+    },
+    {
+      "id": "work_family_priority",
+      "label": "工作与家庭安排",
+      "group": "longterm",
+      "kind": "enum",
+      "selfControl": "single_choice",
+      "requirementControl": "acceptable_multi_choice",
+      "allowedOperators": [
+        "in"
+      ],
+      "requiredSelf": false,
+      "sensitive": false,
+      "sourceItem": "三观契合度",
+      "note": "",
+      "options": [
+        {
+          "id": "career",
+          "label": "当前偏事业"
+        },
+        {
+          "id": "balanced",
+          "label": "两者兼顾"
+        },
+        {
+          "id": "family",
+          "label": "当前偏家庭"
+        }
+      ],
+      "presets": [],
+      "scoreEnabled": false
+    },
+    {
+      "id": "emotion_regulation",
+      "label": "情绪调节自评",
+      "group": "longterm",
+      "kind": "enum",
+      "selfControl": "single_choice",
+      "requirementControl": "acceptable_multi_choice",
+      "allowedOperators": [
+        "in"
+      ],
+      "requiredSelf": false,
+      "sensitive": false,
+      "sourceItem": "情绪稳定性与冲突处理能力",
+      "note": "不是心理健康诊断。",
+      "options": [
+        {
+          "id": "needs_time",
+          "label": "常需要较长时间平复"
+        },
+        {
+          "id": "mostly_ok",
+          "label": "大多数时候能平复"
+        },
+        {
+          "id": "steady",
+          "label": "通常能稳定表达"
+        }
+      ],
+      "presets": [],
+      "scoreEnabled": false
+    },
+    {
+      "id": "conflict_style",
+      "label": "冲突处理倾向",
+      "group": "longterm",
+      "kind": "enum",
+      "selfControl": "single_choice",
+      "requirementControl": "acceptable_multi_choice",
+      "allowedOperators": [
+        "in"
+      ],
+      "requiredSelf": false,
+      "sensitive": false,
+      "sourceItem": "情绪稳定性与冲突处理能力",
+      "note": "",
+      "options": [
+        {
+          "id": "immediate_talk",
+          "label": "倾向及时沟通"
+        },
+        {
+          "id": "cool_then_talk",
+          "label": "冷静后沟通"
+        },
+        {
+          "id": "avoid",
+          "label": "倾向回避"
+        },
+        {
+          "id": "seek_help",
+          "label": "必要时寻求帮助"
+        }
+      ],
+      "presets": [],
+      "scoreEnabled": false
+    },
+    {
+      "id": "credit_status",
+      "label": "信用与法律履约情况",
+      "group": "longterm",
+      "kind": "enum",
+      "selfControl": "single_choice",
+      "requirementControl": "acceptable_multi_choice",
+      "allowedOperators": [
+        "in"
+      ],
+      "requiredSelf": false,
+      "sensitive": true,
+      "sourceItem": "法律信用与债务透明度",
+      "note": "不查征信，不收案件细节，不做法律判断。",
+      "options": [
+        {
+          "id": "none_known",
+          "label": "无已知异常"
+        },
+        {
+          "id": "resolved",
+          "label": "曾有异常，已处理"
+        },
+        {
+          "id": "unresolved",
+          "label": "有未处理事项"
+        },
+        {
+          "id": "unknown",
+          "label": "不清楚"
+        }
+      ],
+      "presets": [],
+      "scoreEnabled": false
+    },
+    {
+      "id": "debt_disclosure",
+      "label": "债务沟通意愿",
+      "group": "longterm",
+      "kind": "enum",
+      "selfControl": "single_choice",
+      "requirementControl": "acceptable_multi_choice",
+      "allowedOperators": [
+        "in"
+      ],
+      "requiredSelf": false,
+      "sensitive": true,
+      "sourceItem": "法律信用与债务透明度",
+      "note": "",
+      "options": [
+        {
+          "id": "open",
+          "label": "愿意充分说明"
+        },
+        {
+          "id": "before_marriage",
+          "label": "确定婚姻计划前说明"
+        },
+        {
+          "id": "limited",
+          "label": "倾向有限披露"
+        }
+      ],
+      "presets": [],
+      "scoreEnabled": false
+    },
+    {
+      "id": "children_plan",
+      "label": "生育意愿",
+      "group": "longterm",
+      "kind": "enum",
+      "selfControl": "single_choice",
+      "requirementControl": "acceptable_multi_choice",
+      "allowedOperators": [
+        "in"
+      ],
+      "requiredSelf": false,
+      "sensitive": false,
+      "sourceItem": "生育观念与健康状况",
+      "note": "",
+      "options": [
+        {
+          "id": "yes",
+          "label": "希望有孩子"
+        },
+        {
+          "id": "no",
+          "label": "不希望有孩子"
+        },
+        {
+          "id": "undecided",
+          "label": "尚未决定"
+        }
+      ],
+      "presets": [],
+      "scoreEnabled": false
+    },
+    {
+      "id": "children_number",
+      "label": "理想子女数量",
+      "group": "longterm",
+      "kind": "enum",
+      "selfControl": "single_choice",
+      "requirementControl": "acceptable_multi_choice",
+      "allowedOperators": [
+        "in"
+      ],
+      "requiredSelf": false,
+      "sensitive": false,
+      "sourceItem": "生育观念与健康状况",
+      "note": "与生育意愿仅做输入一致性提示；初版允许该项单独不限，不额外做道德评价。",
+      "options": [
+        {
+          "id": "zero",
+          "label": "0个"
+        },
+        {
+          "id": "one",
+          "label": "1个"
+        },
+        {
+          "id": "two",
+          "label": "2个"
+        },
+        {
+          "id": "three_plus",
+          "label": "3个及以上"
+        },
+        {
+          "id": "undecided",
+          "label": "尚未决定"
+        }
+      ],
+      "presets": [],
+      "scoreEnabled": false
+    },
+    {
+      "id": "parenting_arrangement",
+      "label": "育儿分工意向",
+      "group": "longterm",
+      "kind": "enum",
+      "selfControl": "single_choice",
+      "requirementControl": "acceptable_multi_choice",
+      "allowedOperators": [
+        "in"
+      ],
+      "requiredSelf": false,
+      "sensitive": false,
+      "sourceItem": "生育观念与健康状况",
+      "note": "",
+      "options": [
+        {
+          "id": "shared",
+          "label": "共同承担"
+        },
+        {
+          "id": "availability",
+          "label": "按工作情况协商"
+        },
+        {
+          "id": "family_support",
+          "label": "考虑家人协助"
+        },
+        {
+          "id": "not_applicable",
+          "label": "不适用／未决定"
+        }
+      ],
+      "presets": [],
+      "scoreEnabled": false
+    },
+    {
+      "id": "health_status",
+      "label": "健康情况自述",
+      "group": "longterm",
+      "kind": "enum",
+      "selfControl": "single_choice",
+      "requirementControl": "acceptable_multi_choice",
+      "allowedOperators": [
+        "in"
+      ],
+      "requiredSelf": false,
+      "sensitive": true,
+      "sourceItem": "生育观念与健康状况",
+      "note": "不进行诊断、寿命推断或医疗建议，不参与评分。",
+      "options": [
+        {
+          "id": "no_current_limit",
+          "label": "目前无自述生活限制"
+        },
+        {
+          "id": "managed",
+          "label": "有需持续管理的状况"
+        },
+        {
+          "id": "assistance",
+          "label": "有需日常协助的状况"
+        },
+        {
+          "id": "unknown",
+          "label": "不清楚"
+        }
+      ],
+      "presets": [],
+      "scoreEnabled": false
+    },
+    {
+      "id": "cleanliness",
+      "label": "整洁习惯",
+      "group": "longterm",
+      "kind": "enum",
+      "selfControl": "single_choice",
+      "requirementControl": "acceptable_multi_choice",
+      "allowedOperators": [
+        "in"
+      ],
+      "requiredSelf": false,
+      "sensitive": false,
+      "sourceItem": "生活习惯兼容度",
+      "note": "",
+      "options": [
+        {
+          "id": "relaxed",
+          "label": "较随意"
+        },
+        {
+          "id": "regular",
+          "label": "定期整理"
+        },
+        {
+          "id": "high",
+          "label": "对整洁要求较高"
+        }
+      ],
+      "presets": [],
+      "scoreEnabled": false
+    },
+    {
+      "id": "diet",
+      "label": "饮食习惯",
+      "group": "longterm",
+      "kind": "enum",
+      "selfControl": "single_choice",
+      "requirementControl": "acceptable_multi_choice",
+      "allowedOperators": [
+        "in"
+      ],
+      "requiredSelf": false,
+      "sensitive": false,
+      "sourceItem": "生活习惯兼容度",
+      "note": "不推断宗教或疾病。",
+      "options": [
+        {
+          "id": "broad",
+          "label": "食物选择较广"
+        },
+        {
+          "id": "vegetarian",
+          "label": "以素食为主"
+        },
+        {
+          "id": "specific",
+          "label": "有特定饮食安排"
+        }
+      ],
+      "presets": [],
+      "scoreEnabled": false
+    },
+    {
+      "id": "pets",
+      "label": "养宠物意向",
+      "group": "longterm",
+      "kind": "enum",
+      "selfControl": "single_choice",
+      "requirementControl": "acceptable_multi_choice",
+      "allowedOperators": [
+        "in"
+      ],
+      "requiredSelf": false,
+      "sensitive": false,
+      "sourceItem": "生活习惯兼容度",
+      "note": "",
+      "options": [
+        {
+          "id": "yes",
+          "label": "愿意／已有"
+        },
+        {
+          "id": "no",
+          "label": "不愿意"
+        },
+        {
+          "id": "discuss",
+          "label": "可协商"
+        }
+      ],
+      "presets": [],
+      "scoreEnabled": false
+    },
+    {
+      "id": "zodiac_sign",
+      "label": "星座",
+      "group": "types",
+      "kind": "enum",
+      "selfControl": "single_choice",
+      "requirementControl": "acceptable_multi_choice",
+      "allowedOperators": [
+        "in"
+      ],
+      "requiredSelf": false,
+      "sensitive": false,
+      "sourceItem": "星象学",
+      "note": "普通类型筛选，不宣称决定适配程度；不额外收生日。",
+      "options": [
+        {
+          "id": "z1",
+          "label": "白羊"
+        },
+        {
+          "id": "z2",
+          "label": "金牛"
+        },
+        {
+          "id": "z3",
+          "label": "双子"
+        },
+        {
+          "id": "z4",
+          "label": "巨蟹"
+        },
+        {
+          "id": "z5",
+          "label": "狮子"
+        },
+        {
+          "id": "z6",
+          "label": "处女"
+        },
+        {
+          "id": "z7",
+          "label": "天秤"
+        },
+        {
+          "id": "z8",
+          "label": "天蝎"
+        },
+        {
+          "id": "z9",
+          "label": "射手"
+        },
+        {
+          "id": "z10",
+          "label": "摩羯"
+        },
+        {
+          "id": "z11",
+          "label": "水瓶"
+        },
+        {
+          "id": "z12",
+          "label": "双鱼"
+        }
+      ],
+      "presets": [],
+      "scoreEnabled": false
+    },
+    {
+      "id": "chinese_zodiac",
+      "label": "生肖",
+      "group": "types",
+      "kind": "enum",
+      "selfControl": "single_choice",
+      "requirementControl": "acceptable_multi_choice",
+      "allowedOperators": [
+        "in"
+      ],
+      "requiredSelf": false,
+      "sensitive": false,
+      "sourceItem": "生肖配",
+      "note": "初版不与年龄推算、不开发合盘。",
+      "options": [
+        {
+          "id": "c1",
+          "label": "鼠"
+        },
+        {
+          "id": "c2",
+          "label": "牛"
+        },
+        {
+          "id": "c3",
+          "label": "虎"
+        },
+        {
+          "id": "c4",
+          "label": "兔"
+        },
+        {
+          "id": "c5",
+          "label": "龙"
+        },
+        {
+          "id": "c6",
+          "label": "蛇"
+        },
+        {
+          "id": "c7",
+          "label": "马"
+        },
+        {
+          "id": "c8",
+          "label": "羊"
+        },
+        {
+          "id": "c9",
+          "label": "猴"
+        },
+        {
+          "id": "c10",
+          "label": "鸡"
+        },
+        {
+          "id": "c11",
+          "label": "狗"
+        },
+        {
+          "id": "c12",
+          "label": "猪"
+        }
+      ],
+      "presets": [],
+      "scoreEnabled": false
+    },
+    {
+      "id": "mbti",
+      "label": "MBTI",
+      "group": "types",
+      "kind": "enum",
+      "selfControl": "single_choice",
+      "requirementControl": "acceptable_multi_choice",
+      "allowedOperators": [
+        "in"
+      ],
+      "requiredSelf": false,
+      "sensitive": false,
+      "sourceItem": "MBTI匹配",
+      "note": "普通类别筛选，不做临床人格评估或类型优劣评分。",
+      "options": [
+        {
+          "id": "INTJ",
+          "label": "INTJ"
+        },
+        {
+          "id": "INTP",
+          "label": "INTP"
+        },
+        {
+          "id": "INFJ",
+          "label": "INFJ"
+        },
+        {
+          "id": "INFP",
+          "label": "INFP"
+        },
+        {
+          "id": "ISTJ",
+          "label": "ISTJ"
+        },
+        {
+          "id": "ISTP",
+          "label": "ISTP"
+        },
+        {
+          "id": "ISFJ",
+          "label": "ISFJ"
+        },
+        {
+          "id": "ISFP",
+          "label": "ISFP"
+        },
+        {
+          "id": "ENTJ",
+          "label": "ENTJ"
+        },
+        {
+          "id": "ENTP",
+          "label": "ENTP"
+        },
+        {
+          "id": "ENFJ",
+          "label": "ENFJ"
+        },
+        {
+          "id": "ENFP",
+          "label": "ENFP"
+        },
+        {
+          "id": "ESTJ",
+          "label": "ESTJ"
+        },
+        {
+          "id": "ESTP",
+          "label": "ESTP"
+        },
+        {
+          "id": "ESFJ",
+          "label": "ESFJ"
+        },
+        {
+          "id": "ESFP",
+          "label": "ESFP"
+        },
+        {
+          "id": "unknown",
+          "label": "未测／不清楚"
+        }
+      ],
+      "presets": [],
+      "scoreEnabled": false
+    }
+  ]
+}

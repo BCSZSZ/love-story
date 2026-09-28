@@ -1,0 +1,11 @@
+node_modules/
+dist/
+cdk.out/
+coverage/
+.local-data/
+.env
+.env.*
+!.env.example
+*.log
+playwright-report/
+test-results/

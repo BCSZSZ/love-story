@@ -1,0 +1,111 @@
+{
+  "checkedAtUtc": "2026-09-28T13:48:33.775947+00:00",
+  "scope": "legacy-fixtures-and-v2-migration-seed-only",
+  "legacyFieldCount": 63,
+  "v2QuestionCount": 62,
+  "scoreEnabledCount": 12,
+  "fixtureCount": 10,
+  "configurationValid": true,
+  "sourceReferenceCount": 20,
+  "fixtures": [
+    {
+      "id": "adult_only",
+      "result": {
+        "population": 5600000000.0,
+        "ownScore": null,
+        "requirementsScore": null
+      },
+      "passed": true
+    },
+    {
+      "id": "985_only",
+      "result": {
+        "population": 56000000.0,
+        "ownScore": null,
+        "requirementsScore": 90.0
+      },
+      "passed": true
+    },
+    {
+      "id": "211_including_985_union_dedup",
+      "result": {
+        "population": 168000000.0,
+        "ownScore": null,
+        "requirementsScore": 75.0
+      },
+      "passed": true
+    },
+    {
+      "id": "tokyo_only",
+      "result": {
+        "population": 11200000.0,
+        "ownScore": null,
+        "requirementsScore": null
+      },
+      "passed": true
+    },
+    {
+      "id": "age_18_through_24_inclusive",
+      "result": {
+        "population": 784000000.0000001,
+        "ownScore": null,
+        "requirementsScore": null
+      },
+      "passed": true
+    },
+    {
+      "id": "same_model_two_sides_75",
+      "result": {
+        "population": 22400000.0,
+        "ownScore": 75.0,
+        "requirementsScore": 75.0
+      },
+      "passed": true
+    },
+    {
+      "id": "hobbies_any_of_no_double_sum",
+      "result": {
+        "population": 3416000000.0,
+        "ownScore": null,
+        "requirementsScore": null
+      },
+      "passed": true
+    },
+    {
+      "id": "relative_age_32_plus_minus_3",
+      "result": {
+        "population": 929599999.9999999,
+        "ownScore": null,
+        "requirementsScore": null
+      },
+      "passed": true
+    },
+    {
+      "id": "worked_example",
+      "result": {
+        "population": 1330.5600000000002,
+        "ownScore": null,
+        "requirementsScore": 80.0
+      },
+      "passed": true
+    },
+    {
+      "id": "relax_only_985_in_worked_example",
+      "result": {
+        "population": 133056.0,
+        "ownScore": null,
+        "requirementsScore": 70.0
+      },
+      "passed": true
+    }
+  ],
+  "notValidatedByThisScript": [
+    "web-app",
+    "lambda",
+    "cdk-synth",
+    "pnpm-tests",
+    "real-dynamodb",
+    "browser",
+    "aws-deployment"
+  ]
+}

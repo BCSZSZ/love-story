@@ -1,0 +1,39 @@
+{
+  "name": "tokyo-love-story",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "东京·爱情故事：匿名择偶条件演示估算器",
+  "packageManager": "pnpm@11.19.0",
+  "engines": {
+    "node": ">=24 <25",
+    "pnpm": ">=11 <12"
+  },
+  "scripts": {
+    "doctor": "node scripts/doctor.mjs",
+    "doctor:project": "node scripts/doctor.mjs",
+    "dev": "concurrently -k -n api,web -c magenta,cyan \"pnpm --filter @tls/api dev\" \"pnpm --filter @tls/web dev\"",
+    "lint": "eslint . --max-warnings=0",
+    "typecheck": "pnpm -r --if-present typecheck",
+    "test": "vitest run",
+    "test:smoke": "playwright test",
+    "test:smoke:deployed": "node scripts/smoke-deployed.mjs",
+    "build": "pnpm -r --if-present build",
+    "infra:synth": "pnpm --filter @tls/infra synth",
+    "infra:diff": "node scripts/infra-diff.mjs",
+    "verify": "pnpm lint && pnpm typecheck && pnpm test && pnpm build",
+    "release:plan": "node scripts/release-plan.mjs",
+    "release:deploy": "node scripts/release-deploy.mjs"
+  },
+  "devDependencies": {
+    "@eslint/js": "10.0.1",
+    "@playwright/test": "1.63.0",
+    "@types/node": "24.19.0",
+    "concurrently": "10.0.5",
+    "eslint": "10.11.0",
+    "tsx": "4.23.15",
+    "typescript": "6.0.3",
+    "typescript-eslint": "8.70.1",
+    "vitest": "5.0.2"
+  }
+}

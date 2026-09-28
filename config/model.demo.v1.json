@@ -1,0 +1,1421 @@
+{
+  "schemaVersion": "1.0.0",
+  "modelVersion": "model-demo-1.0.0",
+  "catalogVersion": "catalog-demo-1.0.0",
+  "status": "synthetic-demo",
+  "notPopulationStatistics": true,
+  "source": {
+    "kind": "designer-placeholder",
+    "description": "为功能开发设定的演示参数；未做人口统计验证，不得标注为权威数据。",
+    "url": null,
+    "asOf": null
+  },
+  "basePopulation": 8000000000,
+  "adultFraction": 0.7,
+  "adultFractionStatus": "synthetic-demo",
+  "currency": {
+    "base": "CNY",
+    "demoCnyPerUnit": {
+      "CNY": 1,
+      "JPY": 0.05
+    },
+    "status": "synthetic-demo-not-current-fx",
+    "rateVersion": "fx-demo-1.0.0"
+  },
+  "probabilityModel": "independent-fields-v1",
+  "scoreAggregation": "weighted-mean-over-present-scorable-fields",
+  "requirementScoreProjection": "minimum-score-in-accepted-set",
+  "fields": {
+    "gender": {
+      "distribution": {
+        "kind": "categorical",
+        "mass": {
+          "female": 0.495,
+          "male": 0.495,
+          "other": 0.01
+        }
+      },
+      "score": {
+        "kind": "excluded",
+        "weight": 0
+      }
+    },
+    "age": {
+      "distribution": {
+        "kind": "bucket_uniform_discrete",
+        "buckets": [
+          {
+            "from": 18,
+            "toExclusive": 25,
+            "mass": 0.14
+          },
+          {
+            "from": 25,
+            "toExclusive": 30,
+            "mass": 0.12
+          },
+          {
+            "from": 30,
+            "toExclusive": 35,
+            "mass": 0.12
+          },
+          {
+            "from": 35,
+            "toExclusive": 40,
+            "mass": 0.11
+          },
+          {
+            "from": 40,
+            "toExclusive": 50,
+            "mass": 0.18
+          },
+          {
+            "from": 50,
+            "toExclusive": 65,
+            "mass": 0.2
+          },
+          {
+            "from": 65,
+            "toExclusive": 101,
+            "mass": 0.13
+          }
+        ]
+      },
+      "score": {
+        "kind": "excluded",
+        "weight": 0
+      }
+    },
+    "nationality": {
+      "distribution": {
+        "kind": "categorical",
+        "mass": {
+          "CN": 0.18,
+          "JP": 0.016,
+          "KR": 0.006,
+          "US": 0.045,
+          "CA": 0.005,
+          "AU": 0.004,
+          "OTHER": 0.744
+        }
+      },
+      "score": {
+        "kind": "excluded",
+        "weight": 0
+      }
+    },
+    "residence": {
+      "distribution": {
+        "kind": "categorical",
+        "mass": {
+          "cn_shanghai": 0.003,
+          "cn_jiangsu": 0.01,
+          "cn_zhejiang": 0.008,
+          "cn_beijing": 0.003,
+          "cn_guangdong": 0.015,
+          "cn_other": 0.141,
+          "jp_tokyo": 0.002,
+          "jp_kanagawa": 0.001,
+          "jp_saitama": 0.001,
+          "jp_chiba": 0.001,
+          "jp_osaka": 0.001,
+          "jp_other": 0.01,
+          "world_other": 0.804
+        }
+      },
+      "score": {
+        "kind": "excluded",
+        "weight": 0
+      }
+    },
+    "hukou": {
+      "distribution": {
+        "kind": "categorical",
+        "mass": {
+          "cn_shanghai": 0.003,
+          "cn_jiangsu": 0.01,
+          "cn_zhejiang": 0.008,
+          "cn_beijing": 0.003,
+          "cn_guangdong": 0.015,
+          "cn_other": 0.141,
+          "not_applicable": 0.82
+        }
+      },
+      "score": {
+        "kind": "excluded",
+        "weight": 0
+      }
+    },
+    "marital_status": {
+      "distribution": {
+        "kind": "categorical",
+        "mass": {
+          "never_married": 0.36,
+          "divorced_no_children": 0.05,
+          "divorced_with_children": 0.06,
+          "widowed": 0.06,
+          "married": 0.47
+        }
+      },
+      "score": {
+        "kind": "excluded",
+        "weight": 0
+      }
+    },
+    "relationship_count": {
+      "distribution": {
+        "kind": "categorical",
+        "mass": {
+          "zero": 0.15,
+          "one": 0.3,
+          "two_three": 0.4,
+          "four_plus": 0.15
+        }
+      },
+      "score": {
+        "kind": "excluded",
+        "weight": 0
+      }
+    },
+    "cohabitation": {
+      "distribution": {
+        "kind": "categorical",
+        "mass": {
+          "never": 0.55,
+          "past": 0.3,
+          "current": 0.15
+        }
+      },
+      "score": {
+        "kind": "excluded",
+        "weight": 0
+      }
+    },
+    "height_cm": {
+      "distribution": {
+        "kind": "bucket_uniform_discrete",
+        "buckets": [
+          {
+            "from": 120,
+            "toExclusive": 150,
+            "mass": 0.04
+          },
+          {
+            "from": 150,
+            "toExclusive": 160,
+            "mass": 0.21
+          },
+          {
+            "from": 160,
+            "toExclusive": 170,
+            "mass": 0.35
+          },
+          {
+            "from": 170,
+            "toExclusive": 180,
+            "mass": 0.29
+          },
+          {
+            "from": 180,
+            "toExclusive": 190,
+            "mass": 0.1
+          },
+          {
+            "from": 190,
+            "toExclusive": 221,
+            "mass": 0.01
+          }
+        ]
+      },
+      "score": {
+        "kind": "excluded",
+        "weight": 0
+      }
+    },
+    "weight_kg": {
+      "distribution": {
+        "kind": "bucket_uniform_discrete",
+        "buckets": [
+          {
+            "from": 30,
+            "toExclusive": 45,
+            "mass": 0.05
+          },
+          {
+            "from": 45,
+            "toExclusive": 55,
+            "mass": 0.2
+          },
+          {
+            "from": 55,
+            "toExclusive": 65,
+            "mass": 0.3
+          },
+          {
+            "from": 65,
+            "toExclusive": 80,
+            "mass": 0.28
+          },
+          {
+            "from": 80,
+            "toExclusive": 100,
+            "mass": 0.12
+          },
+          {
+            "from": 100,
+            "toExclusive": 251,
+            "mass": 0.05
+          }
+        ]
+      },
+      "score": {
+        "kind": "excluded",
+        "weight": 0
+      }
+    },
+    "appearance": {
+      "distribution": {
+        "kind": "categorical",
+        "mass": {
+          "level_1": 0.1,
+          "level_2": 0.2,
+          "level_3": 0.4,
+          "level_4": 0.25,
+          "level_5": 0.05
+        }
+      },
+      "score": {
+        "kind": "category_map",
+        "weight": 1,
+        "values": {
+          "level_1": 20,
+          "level_2": 40,
+          "level_3": 60,
+          "level_4": 80,
+          "level_5": 100
+        }
+      }
+    },
+    "university_tier": {
+      "distribution": {
+        "kind": "categorical",
+        "mass": {
+          "regular_or_below": 0.9,
+          "first_tier_non211": 0.065,
+          "211_non985": 0.02,
+          "985": 0.01,
+          "overseas": 0.005
+        }
+      },
+      "score": {
+        "kind": "category_map",
+        "weight": 1,
+        "values": {
+          "regular_or_below": 30,
+          "first_tier_non211": 60,
+          "211_non985": 75,
+          "985": 90,
+          "overseas": 60
+        }
+      }
+    },
+    "education": {
+      "distribution": {
+        "kind": "categorical",
+        "mass": {
+          "high_school_or_below": 0.6,
+          "associate": 0.15,
+          "bachelor": 0.21,
+          "master": 0.035,
+          "doctor": 0.005
+        }
+      },
+      "score": {
+        "kind": "category_map",
+        "weight": 1,
+        "values": {
+          "high_school_or_below": 20,
+          "associate": 40,
+          "bachelor": 60,
+          "master": 80,
+          "doctor": 100
+        }
+      }
+    },
+    "home": {
+      "distribution": {
+        "kind": "categorical",
+        "mass": {
+          "none": 0.65,
+          "mortgaged": 0.25,
+          "paid_off": 0.1
+        }
+      },
+      "score": {
+        "kind": "category_map",
+        "weight": 1,
+        "values": {
+          "none": 20,
+          "mortgaged": 65,
+          "paid_off": 90
+        }
+      }
+    },
+    "car": {
+      "distribution": {
+        "kind": "categorical",
+        "mass": {
+          "none": 0.55,
+          "financed": 0.2,
+          "paid_off": 0.25
+        }
+      },
+      "score": {
+        "kind": "category_map",
+        "weight": 1,
+        "values": {
+          "none": 20,
+          "financed": 60,
+          "paid_off": 80
+        }
+      }
+    },
+    "other_assets_cny": {
+      "distribution": {
+        "kind": "bucket_uniform_discrete",
+        "buckets": [
+          {
+            "from": 0,
+            "toExclusive": 10000,
+            "mass": 0.35
+          },
+          {
+            "from": 10000,
+            "toExclusive": 100000,
+            "mass": 0.3
+          },
+          {
+            "from": 100000,
+            "toExclusive": 500000,
+            "mass": 0.2
+          },
+          {
+            "from": 500000,
+            "toExclusive": 1000000,
+            "mass": 0.08
+          },
+          {
+            "from": 1000000,
+            "toExclusive": 5000000,
+            "mass": 0.06
+          },
+          {
+            "from": 5000000,
+            "toExclusive": 100000001,
+            "mass": 0.01
+          }
+        ]
+      },
+      "score": {
+        "kind": "piecewise_linear",
+        "weight": 1,
+        "knots": [
+          {
+            "value": 0,
+            "score": 0
+          },
+          {
+            "value": 10000,
+            "score": 20
+          },
+          {
+            "value": 100000,
+            "score": 40
+          },
+          {
+            "value": 500000,
+            "score": 65
+          },
+          {
+            "value": 1000000,
+            "score": 80
+          },
+          {
+            "value": 5000000,
+            "score": 95
+          },
+          {
+            "value": 100000000,
+            "score": 100
+          }
+        ]
+      }
+    },
+    "debt_cny": {
+      "distribution": {
+        "kind": "bucket_uniform_discrete",
+        "buckets": [
+          {
+            "from": 0,
+            "toExclusive": 1,
+            "mass": 0.45
+          },
+          {
+            "from": 1,
+            "toExclusive": 100000,
+            "mass": 0.2
+          },
+          {
+            "from": 100000,
+            "toExclusive": 500000,
+            "mass": 0.2
+          },
+          {
+            "from": 500000,
+            "toExclusive": 1000000,
+            "mass": 0.1
+          },
+          {
+            "from": 1000000,
+            "toExclusive": 100000001,
+            "mass": 0.05
+          }
+        ]
+      },
+      "score": {
+        "kind": "piecewise_linear",
+        "weight": 1,
+        "knots": [
+          {
+            "value": 0,
+            "score": 100
+          },
+          {
+            "value": 100000,
+            "score": 80
+          },
+          {
+            "value": 500000,
+            "score": 60
+          },
+          {
+            "value": 1000000,
+            "score": 40
+          },
+          {
+            "value": 100000000,
+            "score": 0
+          }
+        ]
+      }
+    },
+    "occupation": {
+      "distribution": {
+        "kind": "categorical",
+        "mass": {
+          "student": 0.09090909090909091,
+          "it_engineering": 0.09090909090909091,
+          "professional": 0.09090909090909091,
+          "education_research": 0.09090909090909091,
+          "public_sector": 0.09090909090909091,
+          "business_office": 0.09090909090909091,
+          "service_trade": 0.09090909090909091,
+          "self_employed": 0.09090909090909091,
+          "not_working": 0.09090909090909091,
+          "retired": 0.09090909090909091,
+          "other": 0.09090909090909091
+        }
+      },
+      "score": {
+        "kind": "excluded",
+        "weight": 0
+      }
+    },
+    "annual_income_cny": {
+      "distribution": {
+        "kind": "bucket_uniform_discrete",
+        "buckets": [
+          {
+            "from": 0,
+            "toExclusive": 60000,
+            "mass": 0.5
+          },
+          {
+            "from": 60000,
+            "toExclusive": 120000,
+            "mass": 0.25
+          },
+          {
+            "from": 120000,
+            "toExclusive": 240000,
+            "mass": 0.15
+          },
+          {
+            "from": 240000,
+            "toExclusive": 500000,
+            "mass": 0.07
+          },
+          {
+            "from": 500000,
+            "toExclusive": 1000000,
+            "mass": 0.025
+          },
+          {
+            "from": 1000000,
+            "toExclusive": 100000001,
+            "mass": 0.005
+          }
+        ]
+      },
+      "score": {
+        "kind": "piecewise_linear",
+        "weight": 1,
+        "knots": [
+          {
+            "value": 0,
+            "score": 0
+          },
+          {
+            "value": 60000,
+            "score": 30
+          },
+          {
+            "value": 120000,
+            "score": 50
+          },
+          {
+            "value": 240000,
+            "score": 70
+          },
+          {
+            "value": 500000,
+            "score": 90
+          },
+          {
+            "value": 1000000,
+            "score": 100
+          },
+          {
+            "value": 100000000,
+            "score": 100
+          }
+        ]
+      }
+    },
+    "job_stability": {
+      "distribution": {
+        "kind": "categorical",
+        "mass": {
+          "high_volatility": 0.25,
+          "medium": 0.5,
+          "stable": 0.25
+        }
+      },
+      "score": {
+        "kind": "category_map",
+        "weight": 1,
+        "values": {
+          "high_volatility": 30,
+          "medium": 60,
+          "stable": 85
+        }
+      }
+    },
+    "career_plan": {
+      "distribution": {
+        "kind": "categorical",
+        "mass": {
+          "exploring": 0.3333333333333333,
+          "some_plan": 0.3333333333333333,
+          "clear_plan": 0.3333333333333333
+        }
+      },
+      "score": {
+        "kind": "category_map",
+        "weight": 1,
+        "values": {
+          "exploring": 40,
+          "some_plan": 60,
+          "clear_plan": 80
+        }
+      }
+    },
+    "risk_buffer": {
+      "distribution": {
+        "kind": "categorical",
+        "mass": {
+          "under_3m": 0.35,
+          "3_6m": 0.3,
+          "6_12m": 0.2,
+          "12m_plus": 0.15
+        }
+      },
+      "score": {
+        "kind": "category_map",
+        "weight": 1,
+        "values": {
+          "under_3m": 20,
+          "3_6m": 45,
+          "6_12m": 70,
+          "12m_plus": 90
+        }
+      }
+    },
+    "financial_assets_cny": {
+      "distribution": {
+        "kind": "bucket_uniform_discrete",
+        "buckets": [
+          {
+            "from": 0,
+            "toExclusive": 10000,
+            "mass": 0.35
+          },
+          {
+            "from": 10000,
+            "toExclusive": 100000,
+            "mass": 0.3
+          },
+          {
+            "from": 100000,
+            "toExclusive": 500000,
+            "mass": 0.2
+          },
+          {
+            "from": 500000,
+            "toExclusive": 1000000,
+            "mass": 0.08
+          },
+          {
+            "from": 1000000,
+            "toExclusive": 5000000,
+            "mass": 0.06
+          },
+          {
+            "from": 5000000,
+            "toExclusive": 100000001,
+            "mass": 0.01
+          }
+        ]
+      },
+      "score": {
+        "kind": "piecewise_linear",
+        "weight": 1,
+        "knots": [
+          {
+            "value": 0,
+            "score": 0
+          },
+          {
+            "value": 10000,
+            "score": 20
+          },
+          {
+            "value": 100000,
+            "score": 40
+          },
+          {
+            "value": 500000,
+            "score": 65
+          },
+          {
+            "value": 1000000,
+            "score": 80
+          },
+          {
+            "value": 5000000,
+            "score": 95
+          },
+          {
+            "value": 100000000,
+            "score": 100
+          }
+        ]
+      }
+    },
+    "sociability": {
+      "distribution": {
+        "kind": "categorical",
+        "mass": {
+          "introvert": 0.35,
+          "balanced": 0.4,
+          "extrovert": 0.25
+        }
+      },
+      "score": {
+        "kind": "excluded",
+        "weight": 0
+      }
+    },
+    "routine": {
+      "distribution": {
+        "kind": "categorical",
+        "mass": {
+          "early": 0.2,
+          "regular": 0.4,
+          "late": 0.25,
+          "variable": 0.15
+        }
+      },
+      "score": {
+        "kind": "excluded",
+        "weight": 0
+      }
+    },
+    "social_frequency": {
+      "distribution": {
+        "kind": "categorical",
+        "mass": {
+          "low": 0.3333333333333333,
+          "medium": 0.3333333333333333,
+          "high": 0.3333333333333333
+        }
+      },
+      "score": {
+        "kind": "excluded",
+        "weight": 0
+      }
+    },
+    "hobbies": {
+      "distribution": {
+        "kind": "independent_tags",
+        "mass": {
+          "sports": 0.4,
+          "reading": 0.35,
+          "gaming": 0.35,
+          "travel": 0.5,
+          "music": 0.5,
+          "cooking": 0.3,
+          "film": 0.5,
+          "outdoors": 0.3
+        }
+      },
+      "score": {
+        "kind": "excluded",
+        "weight": 0
+      }
+    },
+    "smoking": {
+      "distribution": {
+        "kind": "categorical",
+        "mass": {
+          "none": 0.65,
+          "occasional": 0.15,
+          "regular": 0.2
+        }
+      },
+      "score": {
+        "kind": "excluded",
+        "weight": 0
+      }
+    },
+    "drinking": {
+      "distribution": {
+        "kind": "categorical",
+        "mass": {
+          "none": 0.35,
+          "occasional": 0.5,
+          "frequent": 0.12,
+          "problematic_self_report": 0.03
+        }
+      },
+      "score": {
+        "kind": "excluded",
+        "weight": 0
+      }
+    },
+    "gambling": {
+      "distribution": {
+        "kind": "categorical",
+        "mass": {
+          "none": 0.9,
+          "past": 0.07,
+          "current": 0.03
+        }
+      },
+      "score": {
+        "kind": "excluded",
+        "weight": 0
+      }
+    },
+    "drug_use": {
+      "distribution": {
+        "kind": "categorical",
+        "mass": {
+          "none": 0.97,
+          "past": 0.02,
+          "current": 0.01
+        }
+      },
+      "score": {
+        "kind": "excluded",
+        "weight": 0
+      }
+    },
+    "parents_pension_cny": {
+      "distribution": {
+        "kind": "bucket_uniform_discrete",
+        "buckets": [
+          {
+            "from": 0,
+            "toExclusive": 1,
+            "mass": 0.25
+          },
+          {
+            "from": 1,
+            "toExclusive": 2000,
+            "mass": 0.3
+          },
+          {
+            "from": 2000,
+            "toExclusive": 5000,
+            "mass": 0.25
+          },
+          {
+            "from": 5000,
+            "toExclusive": 10000,
+            "mass": 0.15
+          },
+          {
+            "from": 10000,
+            "toExclusive": 100001,
+            "mass": 0.05
+          }
+        ]
+      },
+      "score": {
+        "kind": "excluded",
+        "weight": 0
+      }
+    },
+    "father_age": {
+      "distribution": {
+        "kind": "categorical",
+        "mass": {
+          "under_50": 0.16666666666666666,
+          "50_59": 0.16666666666666666,
+          "60_69": 0.16666666666666666,
+          "70_plus": 0.16666666666666666,
+          "deceased": 0.16666666666666666,
+          "not_known": 0.16666666666666666
+        }
+      },
+      "score": {
+        "kind": "excluded",
+        "weight": 0
+      }
+    },
+    "father_education": {
+      "distribution": {
+        "kind": "categorical",
+        "mass": {
+          "high_school_or_below": 0.16666666666666666,
+          "associate": 0.16666666666666666,
+          "bachelor": 0.16666666666666666,
+          "master": 0.16666666666666666,
+          "doctor": 0.16666666666666666,
+          "not_known": 0.16666666666666666
+        }
+      },
+      "score": {
+        "kind": "excluded",
+        "weight": 0
+      }
+    },
+    "father_occupation": {
+      "distribution": {
+        "kind": "categorical",
+        "mass": {
+          "student": 0.08333333333333333,
+          "it_engineering": 0.08333333333333333,
+          "professional": 0.08333333333333333,
+          "education_research": 0.08333333333333333,
+          "public_sector": 0.08333333333333333,
+          "business_office": 0.08333333333333333,
+          "service_trade": 0.08333333333333333,
+          "self_employed": 0.08333333333333333,
+          "not_working": 0.08333333333333333,
+          "retired": 0.08333333333333333,
+          "other": 0.08333333333333333,
+          "not_known": 0.08333333333333333
+        }
+      },
+      "score": {
+        "kind": "excluded",
+        "weight": 0
+      }
+    },
+    "father_marital": {
+      "distribution": {
+        "kind": "categorical",
+        "mass": {
+          "married": 0.25,
+          "divorced": 0.25,
+          "widowed": 0.25,
+          "other": 0.25
+        }
+      },
+      "score": {
+        "kind": "excluded",
+        "weight": 0
+      }
+    },
+    "mother_age": {
+      "distribution": {
+        "kind": "categorical",
+        "mass": {
+          "under_50": 0.16666666666666666,
+          "50_59": 0.16666666666666666,
+          "60_69": 0.16666666666666666,
+          "70_plus": 0.16666666666666666,
+          "deceased": 0.16666666666666666,
+          "not_known": 0.16666666666666666
+        }
+      },
+      "score": {
+        "kind": "excluded",
+        "weight": 0
+      }
+    },
+    "mother_education": {
+      "distribution": {
+        "kind": "categorical",
+        "mass": {
+          "high_school_or_below": 0.16666666666666666,
+          "associate": 0.16666666666666666,
+          "bachelor": 0.16666666666666666,
+          "master": 0.16666666666666666,
+          "doctor": 0.16666666666666666,
+          "not_known": 0.16666666666666666
+        }
+      },
+      "score": {
+        "kind": "excluded",
+        "weight": 0
+      }
+    },
+    "mother_occupation": {
+      "distribution": {
+        "kind": "categorical",
+        "mass": {
+          "student": 0.08333333333333333,
+          "it_engineering": 0.08333333333333333,
+          "professional": 0.08333333333333333,
+          "education_research": 0.08333333333333333,
+          "public_sector": 0.08333333333333333,
+          "business_office": 0.08333333333333333,
+          "service_trade": 0.08333333333333333,
+          "self_employed": 0.08333333333333333,
+          "not_working": 0.08333333333333333,
+          "retired": 0.08333333333333333,
+          "other": 0.08333333333333333,
+          "not_known": 0.08333333333333333
+        }
+      },
+      "score": {
+        "kind": "excluded",
+        "weight": 0
+      }
+    },
+    "mother_marital": {
+      "distribution": {
+        "kind": "categorical",
+        "mass": {
+          "married": 0.25,
+          "divorced": 0.25,
+          "widowed": 0.25,
+          "other": 0.25
+        }
+      },
+      "score": {
+        "kind": "excluded",
+        "weight": 0
+      }
+    },
+    "only_child": {
+      "distribution": {
+        "kind": "categorical",
+        "mass": {
+          "yes": 0.35,
+          "no": 0.65
+        }
+      },
+      "score": {
+        "kind": "excluded",
+        "weight": 0
+      }
+    },
+    "family_net_assets_cny": {
+      "distribution": {
+        "kind": "bucket_uniform_discrete",
+        "buckets": [
+          {
+            "from": -100000000,
+            "toExclusive": 0,
+            "mass": 0.05
+          },
+          {
+            "from": 0,
+            "toExclusive": 100000,
+            "mass": 0.3
+          },
+          {
+            "from": 100000,
+            "toExclusive": 500000,
+            "mass": 0.3
+          },
+          {
+            "from": 500000,
+            "toExclusive": 1000000,
+            "mass": 0.18
+          },
+          {
+            "from": 1000000,
+            "toExclusive": 5000000,
+            "mass": 0.15
+          },
+          {
+            "from": 5000000,
+            "toExclusive": 100000001,
+            "mass": 0.02
+          }
+        ]
+      },
+      "score": {
+        "kind": "excluded",
+        "weight": 0
+      }
+    },
+    "live_with_parents": {
+      "distribution": {
+        "kind": "categorical",
+        "mass": {
+          "separate": 0.3333333333333333,
+          "same_home": 0.3333333333333333,
+          "flexible": 0.3333333333333333
+        }
+      },
+      "score": {
+        "kind": "excluded",
+        "weight": 0
+      }
+    },
+    "parent_involvement": {
+      "distribution": {
+        "kind": "categorical",
+        "mass": {
+          "couple_decides": 0.3333333333333333,
+          "consult": 0.3333333333333333,
+          "joint_family": 0.3333333333333333
+        }
+      },
+      "score": {
+        "kind": "excluded",
+        "weight": 0
+      }
+    },
+    "family_support": {
+      "distribution": {
+        "kind": "categorical",
+        "mass": {
+          "none_regular": 0.3333333333333333,
+          "regular": 0.3333333333333333,
+          "as_needed": 0.3333333333333333
+        }
+      },
+      "score": {
+        "kind": "excluded",
+        "weight": 0
+      }
+    },
+    "hereditary_history": {
+      "distribution": {
+        "kind": "categorical",
+        "mass": {
+          "none_known": 0.8,
+          "known": 0.05,
+          "unknown": 0.15
+        }
+      },
+      "score": {
+        "kind": "excluded",
+        "weight": 0
+      }
+    },
+    "spending_style": {
+      "distribution": {
+        "kind": "categorical",
+        "mass": {
+          "save": 0.3333333333333333,
+          "balanced": 0.3333333333333333,
+          "enjoy": 0.3333333333333333
+        }
+      },
+      "score": {
+        "kind": "excluded",
+        "weight": 0
+      }
+    },
+    "household_roles": {
+      "distribution": {
+        "kind": "categorical",
+        "mass": {
+          "equal": 0.3333333333333333,
+          "availability": 0.3333333333333333,
+          "other_agreement": 0.3333333333333333
+        }
+      },
+      "score": {
+        "kind": "excluded",
+        "weight": 0
+      }
+    },
+    "work_family_priority": {
+      "distribution": {
+        "kind": "categorical",
+        "mass": {
+          "career": 0.3333333333333333,
+          "balanced": 0.3333333333333333,
+          "family": 0.3333333333333333
+        }
+      },
+      "score": {
+        "kind": "excluded",
+        "weight": 0
+      }
+    },
+    "emotion_regulation": {
+      "distribution": {
+        "kind": "categorical",
+        "mass": {
+          "needs_time": 0.3333333333333333,
+          "mostly_ok": 0.3333333333333333,
+          "steady": 0.3333333333333333
+        }
+      },
+      "score": {
+        "kind": "excluded",
+        "weight": 0
+      }
+    },
+    "conflict_style": {
+      "distribution": {
+        "kind": "categorical",
+        "mass": {
+          "immediate_talk": 0.25,
+          "cool_then_talk": 0.25,
+          "avoid": 0.25,
+          "seek_help": 0.25
+        }
+      },
+      "score": {
+        "kind": "excluded",
+        "weight": 0
+      }
+    },
+    "credit_status": {
+      "distribution": {
+        "kind": "categorical",
+        "mass": {
+          "none_known": 0.25,
+          "resolved": 0.25,
+          "unresolved": 0.25,
+          "unknown": 0.25
+        }
+      },
+      "score": {
+        "kind": "excluded",
+        "weight": 0
+      }
+    },
+    "debt_disclosure": {
+      "distribution": {
+        "kind": "categorical",
+        "mass": {
+          "open": 0.3333333333333333,
+          "before_marriage": 0.3333333333333333,
+          "limited": 0.3333333333333333
+        }
+      },
+      "score": {
+        "kind": "excluded",
+        "weight": 0
+      }
+    },
+    "children_plan": {
+      "distribution": {
+        "kind": "categorical",
+        "mass": {
+          "yes": 0.3333333333333333,
+          "no": 0.3333333333333333,
+          "undecided": 0.3333333333333333
+        }
+      },
+      "score": {
+        "kind": "excluded",
+        "weight": 0
+      }
+    },
+    "children_number": {
+      "distribution": {
+        "kind": "categorical",
+        "mass": {
+          "zero": 0.2,
+          "one": 0.2,
+          "two": 0.2,
+          "three_plus": 0.2,
+          "undecided": 0.2
+        }
+      },
+      "score": {
+        "kind": "excluded",
+        "weight": 0
+      }
+    },
+    "parenting_arrangement": {
+      "distribution": {
+        "kind": "categorical",
+        "mass": {
+          "shared": 0.25,
+          "availability": 0.25,
+          "family_support": 0.25,
+          "not_applicable": 0.25
+        }
+      },
+      "score": {
+        "kind": "excluded",
+        "weight": 0
+      }
+    },
+    "health_status": {
+      "distribution": {
+        "kind": "categorical",
+        "mass": {
+          "no_current_limit": 0.25,
+          "managed": 0.25,
+          "assistance": 0.25,
+          "unknown": 0.25
+        }
+      },
+      "score": {
+        "kind": "excluded",
+        "weight": 0
+      }
+    },
+    "cleanliness": {
+      "distribution": {
+        "kind": "categorical",
+        "mass": {
+          "relaxed": 0.3333333333333333,
+          "regular": 0.3333333333333333,
+          "high": 0.3333333333333333
+        }
+      },
+      "score": {
+        "kind": "excluded",
+        "weight": 0
+      }
+    },
+    "diet": {
+      "distribution": {
+        "kind": "categorical",
+        "mass": {
+          "broad": 0.3333333333333333,
+          "vegetarian": 0.3333333333333333,
+          "specific": 0.3333333333333333
+        }
+      },
+      "score": {
+        "kind": "excluded",
+        "weight": 0
+      }
+    },
+    "pets": {
+      "distribution": {
+        "kind": "categorical",
+        "mass": {
+          "yes": 0.3333333333333333,
+          "no": 0.3333333333333333,
+          "discuss": 0.3333333333333333
+        }
+      },
+      "score": {
+        "kind": "excluded",
+        "weight": 0
+      }
+    },
+    "zodiac_sign": {
+      "distribution": {
+        "kind": "categorical",
+        "mass": {
+          "z1": 0.08333333333333333,
+          "z2": 0.08333333333333333,
+          "z3": 0.08333333333333333,
+          "z4": 0.08333333333333333,
+          "z5": 0.08333333333333333,
+          "z6": 0.08333333333333333,
+          "z7": 0.08333333333333333,
+          "z8": 0.08333333333333333,
+          "z9": 0.08333333333333333,
+          "z10": 0.08333333333333333,
+          "z11": 0.08333333333333333,
+          "z12": 0.08333333333333333
+        }
+      },
+      "score": {
+        "kind": "excluded",
+        "weight": 0
+      }
+    },
+    "chinese_zodiac": {
+      "distribution": {
+        "kind": "categorical",
+        "mass": {
+          "c1": 0.08333333333333333,
+          "c2": 0.08333333333333333,
+          "c3": 0.08333333333333333,
+          "c4": 0.08333333333333333,
+          "c5": 0.08333333333333333,
+          "c6": 0.08333333333333333,
+          "c7": 0.08333333333333333,
+          "c8": 0.08333333333333333,
+          "c9": 0.08333333333333333,
+          "c10": 0.08333333333333333,
+          "c11": 0.08333333333333333,
+          "c12": 0.08333333333333333
+        }
+      },
+      "score": {
+        "kind": "excluded",
+        "weight": 0
+      }
+    },
+    "mbti": {
+      "distribution": {
+        "kind": "categorical",
+        "mass": {
+          "INTJ": 0.058823529411764705,
+          "INTP": 0.058823529411764705,
+          "INFJ": 0.058823529411764705,
+          "INFP": 0.058823529411764705,
+          "ISTJ": 0.058823529411764705,
+          "ISTP": 0.058823529411764705,
+          "ISFJ": 0.058823529411764705,
+          "ISFP": 0.058823529411764705,
+          "ENTJ": 0.058823529411764705,
+          "ENTP": 0.058823529411764705,
+          "ENFJ": 0.058823529411764705,
+          "ENFP": 0.058823529411764705,
+          "ESTJ": 0.058823529411764705,
+          "ESTP": 0.058823529411764705,
+          "ESFJ": 0.058823529411764705,
+          "ESFP": 0.058823529411764705,
+          "unknown": 0.058823529411764705
+        }
+      },
+      "score": {
+        "kind": "excluded",
+        "weight": 0
+      }
+    }
+  }
+}

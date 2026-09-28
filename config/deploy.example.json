@@ -1,0 +1,89 @@
+{
+  "project": "tokyo-love-story",
+  "stage": "prod",
+  "aws": {
+    "accountId": null,
+    "profile": null,
+    "region": "ap-northeast-1"
+  },
+  "domain": {
+    "name": null,
+    "acmCertificateArn": null,
+    "certificateRegion": "us-east-1"
+  },
+  "cloudfront": {
+    "pricingMode": "pay-as-you-go",
+    "apiCachingEnabled": false,
+    "publicConfigCachingEnabled": true,
+    "privateS3Origin": true,
+    "hashRouting": true
+  },
+  "lambda": {
+    "functionCount": 3,
+    "runtime": "nodejs24.x",
+    "architecture": "arm64",
+    "memoryMiB": 256,
+    "timeoutSeconds": 5,
+    "reservedConcurrency": 5,
+    "vpcEnabled": false
+  },
+  "api": {
+    "routeCount": 14,
+    "stageRatePerSecond": 10,
+    "stageBurst": 20,
+    "createRatePerSecond": 2,
+    "createBurst": 5,
+    "maxRecordBodyKiB": 64,
+    "maxConfigBodyMiB": 5
+  },
+  "administrator": {
+    "provider": "cognito",
+    "selfRegistrationEnabled": false,
+    "mfa": "OFF",
+    "oauthFlow": "authorization-code-pkce",
+    "callbackUrl": null,
+    "requiredGroup": "config-admin",
+    "requiredScope": "config/write"
+  },
+  "configuration": {
+    "metadataStore": "dynamodb",
+    "bodyStore": "private-versioned-s3",
+    "excelMaxMiB": 5,
+    "publicReadCacheSeconds": 300,
+    "administratorCanReadAnonymousRecords": false
+  },
+  "records": {
+    "billingMode": "PAY_PER_REQUEST",
+    "ttlAttribute": "expiresAt",
+    "retentionCalendarYears": 1,
+    "retentionStart": "first-server-create",
+    "extendOnUpdate": false,
+    "publicReadEnabled": false,
+    "pointInTimeRecovery": false
+  },
+  "autosave": {
+    "debounceMs": 1500,
+    "normalMinIntervalMs": 10000,
+    "maxWaitMs": 30000,
+    "maxInFlightPerRecord": 1
+  },
+  "logging": {
+    "retentionDays": 14,
+    "logPayload": false,
+    "logAuthorization": false,
+    "cloudfrontStandardLogs": false
+  },
+  "budget": {
+    "alertEmail": null,
+    "suggestedUsdThresholds": [
+      5,
+      10,
+      20
+    ],
+    "isHardSpendingCap": false
+  },
+  "release": {
+    "allowDeploy": false,
+    "requireCurrentUserAuthorization": true
+  }
+}

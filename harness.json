@@ -1,0 +1,47 @@
+{
+  "schemaVersion": "1.0.0",
+  "status": "policy-contract-not-an-enforcement-sandbox",
+  "project": "tokyo-love-story",
+  "permissions": {
+    "localCodeEdit": true,
+    "localValidation": true,
+    "offlineCdkSynth": true,
+    "gitCommit": false,
+    "gitPush": false,
+    "gitBranchSwitch": false,
+    "rewriteGitHistory": false,
+    "awsBootstrap": false,
+    "awsDeploy": false,
+    "createPaidResources": false,
+    "publishPublicService": false,
+    "scanRealUserData": false,
+    "deleteRemoteData": false
+  },
+  "requiresExplicitUserAuthorization": [
+    "gitCommit",
+    "gitPush",
+    "awsBootstrap",
+    "awsDeploy",
+    "createPaidResources",
+    "publishPublicService",
+    "scanRealUserData",
+    "deleteRemoteData"
+  ],
+  "commandsToImplement": {
+    "doctor": "pnpm doctor",
+    "dev": "pnpm dev",
+    "verify": "pnpm verify",
+    "smoke": "pnpm test:smoke",
+    "infraSynth": "pnpm infra:synth",
+    "infraDiff": "pnpm infra:diff",
+    "releasePlan": "pnpm release:plan",
+    "releaseDeploy": "pnpm release:deploy"
+  },
+  "alwaysRead": [
+    "AGENTS.md",
+    "CONTEXT.md"
+  ],
+  "stagePlan": "docs/07-plan.md",
+  "defaultAwsRegion": "ap-northeast-1",
+  "noDefaultCloudDeployment": true
+}

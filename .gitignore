@@ -1,0 +1,12 @@
+node_modules/
+dist/
+cdk.out/
+.local-data/
+.env
+.env.*
+!.env.example
+playwright-report/
+test-results/
+coverage/
+*.log
+apps/web/public/smoke-export.png

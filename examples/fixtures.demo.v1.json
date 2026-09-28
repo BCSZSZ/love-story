@@ -1,0 +1,302 @@
+{
+  "schemaVersion": "1.0.0",
+  "modelVersion": "model-demo-1.0.0",
+  "kind": "synthetic-arithmetic-fixtures-not-population-facts",
+  "cases": [
+    {
+      "id": "adult_only",
+      "input": {
+        "own": {},
+        "requirements": {}
+      },
+      "expected": {
+        "population": 5600000000,
+        "ownScore": null,
+        "requirementsScore": null
+      }
+    },
+    {
+      "id": "985_only",
+      "input": {
+        "own": {},
+        "requirements": {
+          "university_tier": {
+            "state": "required",
+            "predicate": {
+              "op": "in",
+              "values": [
+                "985"
+              ]
+            }
+          }
+        }
+      },
+      "expected": {
+        "population": 56000000,
+        "ownScore": null,
+        "requirementsScore": 90
+      }
+    },
+    {
+      "id": "211_including_985_union_dedup",
+      "input": {
+        "own": {},
+        "requirements": {
+          "university_tier": {
+            "state": "required",
+            "predicate": {
+              "op": "in",
+              "values": [
+                "211_non985",
+                "985",
+                "985"
+              ]
+            }
+          }
+        }
+      },
+      "expected": {
+        "population": 168000000,
+        "ownScore": null,
+        "requirementsScore": 75
+      }
+    },
+    {
+      "id": "tokyo_only",
+      "input": {
+        "own": {},
+        "requirements": {
+          "residence": {
+            "state": "required",
+            "predicate": {
+              "op": "in",
+              "values": [
+                "jp_tokyo"
+              ]
+            }
+          }
+        }
+      },
+      "expected": {
+        "population": 11200000,
+        "ownScore": null,
+        "requirementsScore": null
+      }
+    },
+    {
+      "id": "age_18_through_24_inclusive",
+      "input": {
+        "own": {},
+        "requirements": {
+          "age": {
+            "state": "required",
+            "predicate": {
+              "op": "between",
+              "min": 18,
+              "max": 24
+            }
+          }
+        }
+      },
+      "expected": {
+        "population": 784000000,
+        "ownScore": null,
+        "requirementsScore": null
+      }
+    },
+    {
+      "id": "same_model_two_sides_75",
+      "input": {
+        "own": {
+          "education": {
+            "state": "answered",
+            "value": "master"
+          },
+          "annual_income_cny": {
+            "state": "answered",
+            "value": 240000
+          }
+        },
+        "requirements": {
+          "education": {
+            "state": "required",
+            "predicate": {
+              "op": "in",
+              "values": [
+                "master",
+                "doctor"
+              ]
+            }
+          },
+          "annual_income_cny": {
+            "state": "required",
+            "predicate": {
+              "op": "gte",
+              "value": 240000
+            }
+          }
+        }
+      },
+      "expected": {
+        "population": 22400000,
+        "ownScore": 75,
+        "requirementsScore": 75
+      }
+    },
+    {
+      "id": "hobbies_any_of_no_double_sum",
+      "input": {
+        "own": {},
+        "requirements": {
+          "hobbies": {
+            "state": "required",
+            "predicate": {
+              "op": "any_of",
+              "values": [
+                "sports",
+                "reading"
+              ]
+            }
+          }
+        }
+      },
+      "expected": {
+        "population": 3416000000,
+        "ownScore": null,
+        "requirementsScore": null
+      }
+    },
+    {
+      "id": "relative_age_32_plus_minus_3",
+      "input": {
+        "own": {
+          "age": {
+            "state": "answered",
+            "value": 32
+          }
+        },
+        "requirements": {
+          "age": {
+            "state": "required",
+            "predicate": {
+              "op": "relative",
+              "sourceField": "age",
+              "comparison": "between",
+              "minOffset": -3,
+              "maxOffset": 3
+            }
+          }
+        }
+      },
+      "expected": {
+        "population": 929600000,
+        "ownScore": null,
+        "requirementsScore": null
+      }
+    },
+    {
+      "id": "worked_example",
+      "input": {
+        "own": {},
+        "requirements": {
+          "gender": {
+            "state": "required",
+            "predicate": {
+              "op": "in",
+              "values": [
+                "female"
+              ]
+            }
+          },
+          "residence": {
+            "state": "required",
+            "predicate": {
+              "op": "in",
+              "values": [
+                "jp_tokyo"
+              ]
+            }
+          },
+          "age": {
+            "state": "required",
+            "predicate": {
+              "op": "between",
+              "min": 25,
+              "max": 34
+            }
+          },
+          "university_tier": {
+            "state": "required",
+            "predicate": {
+              "op": "in",
+              "values": [
+                "985"
+              ]
+            }
+          },
+          "annual_income_cny": {
+            "state": "required",
+            "predicate": {
+              "op": "gte",
+              "value": 240000
+            }
+          }
+        }
+      },
+      "expected": {
+        "population": 1330.56,
+        "ownScore": null,
+        "requirementsScore": 80
+      }
+    },
+    {
+      "id": "relax_only_985_in_worked_example",
+      "input": {
+        "own": {},
+        "requirements": {
+          "gender": {
+            "state": "required",
+            "predicate": {
+              "op": "in",
+              "values": [
+                "female"
+              ]
+            }
+          },
+          "residence": {
+            "state": "required",
+            "predicate": {
+              "op": "in",
+              "values": [
+                "jp_tokyo"
+              ]
+            }
+          },
+          "age": {
+            "state": "required",
+            "predicate": {
+              "op": "between",
+              "min": 25,
+              "max": 34
+            }
+          },
+          "university_tier": {
+            "state": "any"
+          },
+          "annual_income_cny": {
+            "state": "required",
+            "predicate": {
+              "op": "gte",
+              "value": 240000
+            }
+          }
+        }
+      },
+      "expected": {
+        "population": 133056,
+        "ownScore": null,
+        "requirementsScore": 70
+      }
+    }
+  ]
+}

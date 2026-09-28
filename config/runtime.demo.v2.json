@@ -1,0 +1,32 @@
+{
+  "schemaVersion": "2.0.0",
+  "configBundleVersion": "bundle-demo-2.0.0",
+  "catalogVersion": "catalog-demo-2.0.0",
+  "modelVersion": "model-demo-2.0.0",
+  "noticeVersion": "privacy-2.0.0",
+  "defaultCityId": "jp_tokyo",
+  "cityResidualMass": 0.991,
+  "cities": [
+    { "id": "jp_tokyo", "label": "日本·东京", "titleLabel": "东京", "status": "active", "populationMass": 0.002 },
+    { "id": "cn_shanghai", "label": "中国·上海", "titleLabel": "上海", "status": "active", "populationMass": 0.003 },
+    { "id": "cn_beijing", "label": "中国·北京", "titleLabel": "北京", "status": "active", "populationMass": 0.003 },
+    { "id": "jp_osaka", "label": "日本·大阪", "titleLabel": "大阪", "status": "active", "populationMass": 0.001 }
+  ],
+  "reachTiers": [
+    { "id": "daily", "label": "日常圈", "people": 2000, "status": "active", "isDefault": true },
+    { "id": "extended", "label": "拓展圈", "people": 5000, "status": "active", "isDefault": false },
+    { "id": "citywide", "label": "城市圈", "people": 10000, "status": "active", "isDefault": false }
+  ],
+  "reachBoosts": [
+    { "id": "friends", "label": "朋友助力", "incrementRate": 0.5, "status": "active" },
+    { "id": "family", "label": "家庭助力", "incrementRate": 0.25, "status": "active" },
+    { "id": "matchmaking_service", "label": "相亲服务助力", "incrementRate": 1, "status": "active" }
+  ],
+  "strictnessLevels": [
+    { "id": "must", "label": "必须满足", "coefficient": 1, "isDefault": true },
+    { "id": "prefer", "label": "尽量满足", "coefficient": 0.8, "isDefault": false },
+    { "id": "negotiable", "label": "可以商量", "coefficient": 0.6, "isDefault": false },
+    { "id": "open", "label": "宽松考虑", "coefficient": 0.4, "isDefault": false },
+    { "id": "any", "label": "无要求", "coefficient": 0, "isDefault": false }
+  ]
+}
