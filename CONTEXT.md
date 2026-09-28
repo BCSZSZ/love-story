@@ -6,7 +6,7 @@
 
 第一轮确认规格 `docs/10-first-round-change-spec.md` 已完成本地实装并通过静态、单元/集成、浏览器和离线 IaC 验证。用户已明确授权本轮实现与 Git 推送，但没有授权 AWS 部署。
 
-用户随后明确提供首次创建的空仓库 `https://github.com/BCSZSZ/love-story` 并要求推送。已在当前目录初始化 `main`，配置 `origin`，且 `git ls-remote` 确认远端尚无 refs；提交与首次 push 正在执行中。
+Git 交付已完成：用户提供首次创建的空仓库 `https://github.com/BCSZSZ/love-story` 并要求推送；本地初始化 `main`、配置 `origin` 后，根提交 `ca3a31a` 已通过普通非强制 push 成功发布到 `origin/main`，本地分支已设置跟踪远端。
 
 历史站点 <https://d2vaw39850chxv.cloudfront.net> 是先前部署的 v1；本轮 v2 未部署，也未针对该历史地址运行新的 v2 线上冒烟。
 
@@ -32,7 +32,7 @@
 - `pnpm verify`：通过；ESLint、7 个 workspace 类型检查、5 个 Vitest 文件共 41 个测试、Web 与 Lambda build 全部完成。Vite 只报告大 chunk 性能警告，不是构建失败。
 - `pnpm test:smoke`：4/4 通过，耗时 18.8 秒；桌面 `1280×900` 和移动 `390×844` 各自验证普通用户真实城市/62 问题/双结果/强度/圈层/PNG/恢复，以及管理员新增动态问题、服务端验证、保存草稿和 Excel 导出。
 - `pnpm infra:synth`：通过；2 个模板、67 个资源、14 条 API route、3 个 Lambda。断言隔离 IAM、Cognito PKCE、MFA OFF、配置桶 versioning、管理员无法访问匿名记录，以及实际 Lambda bundle 的 Node 语法。
-- Git 初始检查确认 workspace 与父目录原本均无 `.git`；用户提供新建空仓库后，已按本次授权初始化 `main` 并配置 `origin`，没有覆盖任何远端历史。
+- Git 初始检查确认 workspace 与父目录原本均无 `.git`；`git ls-remote` 确认用户提供的新仓库无 refs 后，才按本次授权初始化 `main`。根提交 `ca3a31a` 已成功推送，没有覆盖任何远端历史。
 
 ## 未执行或未验证
 
@@ -44,6 +44,5 @@
 
 ## 下一步
 
-1. 完成首次 commit 与普通非强制 push；成功后把 commit 和远端状态补记到本文件。
-2. 如需上线 v2，另行取得针对 AWS 账户、区域、回调地址和本次写操作的明确授权，再依次执行只读 diff、deploy 和真实 Cognito/配置/匿名流程验证。
-3. 上线后补做日本真实 PC 与手机验收；不能把 Playwright 模拟描述为实际设备验证。
+1. 如需上线 v2，另行取得针对 AWS 账户、区域、回调地址和本次写操作的明确授权，再依次执行只读 diff、deploy 和真实 Cognito/配置/匿名流程验证。
+2. 上线后补做日本真实 PC 与手机验收；不能把 Playwright 模拟描述为实际设备验证。

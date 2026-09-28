@@ -1,6 +1,6 @@
 # 11｜第一轮需求实装计划
 
-状态：`IMPLEMENTED_LOCALLY / GIT_DELIVERY_IN_PROGRESS`  
+状态：`IMPLEMENTED_AND_PUSHED / AWS_NOT_DEPLOYED`  
 日期：2026-09-28  
 范围：落实 `docs/10-first-round-change-spec.md`；本地实现、验证、提交与推送。没有 AWS 部署授权。
 
@@ -69,5 +69,5 @@
 - P0～P5 已完成；产品、UX、字段、模型、API、AWS、计划、验收和决策文档已同步为 v2。
 - `python scripts/validate_design.py`、Node 24 下的 `pnpm doctor:project`、`pnpm verify`、`pnpm test:smoke` 与 `pnpm infra:synth` 均通过。
 - `pnpm verify` 实际结果为 5 个 Vitest 文件、41 个测试；浏览器冒烟为桌面/移动共 4 个流程；synth 为 2 个模板、67 个资源、14 条路由和 3 个 Lambda。
-- R6 进行中：用户提供首次创建的空仓库 `https://github.com/BCSZSZ/love-story` 并明确要求推送；当前目录已初始化 `main`、配置 `origin`，正在执行首次提交和普通非强制 push。
+- R6 已完成：用户提供首次创建的空仓库 `https://github.com/BCSZSZ/love-story`；确认远端无 refs 后初始化 `main`，根提交 `ca3a31a` 已通过普通非强制 push 发布到 `origin/main`。
 - R7 未开始：本轮没有 AWS 部署授权，也没有已部署 v2 地址。历史公网地址仍为 v1。
