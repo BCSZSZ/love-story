@@ -4,11 +4,11 @@
 
 ## 结论
 
-第一轮确认规格 `docs/10-first-round-change-spec.md` 已完成本地实装并通过静态、单元/集成、浏览器和离线 IaC 验证。用户已明确授权本轮实现与 Git 推送，但没有授权 AWS 部署。
+第一轮确认规格 `docs/10-first-round-change-spec.md` 已完成实装、Git 推送与 AWS `prod / ap-northeast-1` 部署。用户在 Git 交付后另行明确授权 AWS 写操作，SSO 身份已核验为账户 `212984411858` 的 AdministratorAccess 角色。
 
 Git 交付已完成：用户提供首次创建的空仓库 `https://github.com/BCSZSZ/love-story` 并要求推送；本地初始化 `main`、配置 `origin` 后，根提交 `ca3a31a` 已通过普通非强制 push 成功发布到 `origin/main`，本地分支已设置跟踪远端。
 
-历史站点 <https://d2vaw39850chxv.cloudfront.net> 是先前部署的 v1；本轮 v2 未部署，也未针对该历史地址运行新的 v2 线上冒烟。
+生产站点 <https://d2vaw39850chxv.cloudfront.net> 已更新为 v2；管理员回调和登出地址均为该站点根路径。
 
 ## 已实现
 
@@ -33,16 +33,22 @@ Git 交付已完成：用户提供首次创建的空仓库 `https://github.com/B
 - `pnpm test:smoke`：4/4 通过，耗时 18.8 秒；桌面 `1280×900` 和移动 `390×844` 各自验证普通用户真实城市/62 问题/双结果/强度/圈层/PNG/恢复，以及管理员新增动态问题、服务端验证、保存草稿和 Excel 导出。
 - `pnpm infra:synth`：通过；2 个模板、67 个资源、14 条 API route、3 个 Lambda。断言隔离 IAM、Cognito PKCE、MFA OFF、配置桶 versioning、管理员无法访问匿名记录，以及实际 Lambda bundle 的 Node 语法。
 - Git 初始检查确认 workspace 与父目录原本均无 `.git`；`git ls-remote` 确认用户提供的新仓库无 refs 后，才按本次授权初始化 `main`。根提交 `ca3a31a` 已成功推送，没有覆盖任何远端历史。
+- `aws sso login --profile personal`：成功；STS 返回账户 `212984411858`、SSO AdministratorAccess 角色。部署前 `pnpm infra:diff` 显示只新增配置/Cognito/管理能力并更新现有应用资源，没有替换或删除 records 表、静态桶或 CloudFront distribution。
+- `pnpm release:deploy ...`：重新通过 41 个测试、build、synth 和 diff 后，`Tls-prod-Data` 与 `Tls-prod-App` 均部署成功；静态文件上传完成，CloudFront invalidation `I9MK95ANCXBJF2A1E2OMD1DFI7` 为 Completed。
+- 部署资源核验：两个 stack 均 `UPDATE_COMPLETE`；`tls-prod-config` 为 ACTIVE、PAY_PER_REQUEST、删除保护开启；配置桶 versioning Enabled；Cognito MFA OFF、只允许管理员创建、email 登录、authorization code、`openid config/write`、token revocation 与 `config-admin` group 均成立；HTTP API 为 14 条 route；CloudFront 为 Deployed。
+- 公网接口核验：health 200、上传开启；active 配置为 `bundle-demo-2.0.0` / checksum `46e5a69d…c2ca` / 62 问题 / 4 城市；管理员认证配置 enabled 且 redirect URI 正确；无 token 管理请求返回 401；active 缓存 60 秒，历史配置一年 immutable 且得到 CloudFront hit。
+- `pnpm test:smoke:deployed https://d2vaw39850chxv.cloudfront.net`：桌面 `1280×900` 与移动 `390×844` 全部通过云端保存、双结果、五档、圈层、刷新恢复，桌面 PNG 通过；两条合成记录均 DELETE 204。首次运行暴露公网脚本把完整城市标签误当短标题精确匹配，修正断言后最小复现连续两次及完整 smoke 均通过。
+- 部署后 `pnpm infra:diff`：两个 stack 均 `There were no differences`；`tls-prod-api-5xx` 与 `tls-prod-lambda-errors` 均为 OK。Cognito Hosted Login 返回 200 并显示登录表单。
 
 ## 未执行或未验证
 
-- 未运行 `pnpm infra:diff`：没有显式 AWS profile/账户，本轮也没有 AWS 操作需要。
-- 未执行 AWS bootstrap/deploy、静态上传、CloudFront invalidation、Cognito 管理员创建或真实 DynamoDB/S3 配置发布。
-- 未运行新版 `test:smoke:deployed`，因为没有已部署 v2 地址；历史 v1 地址不符合该脚本前提。
-- 未在日本网络的真实 PC/手机上验证触摸、系统分享、相册保存或 Cognito 跳转；390px Playwright 是浏览器模拟。
-- 大陆网络测试、真实统计参数研究、MFA、实际相亲/登录/聊天、双向接受度仍不在本轮范围。
+- 尚未创建应用管理员：Cognito User Pool、Hosted Login 和鉴权边界已部署，但没有用户指定的邀请邮箱，不能代替用户选择收件人。真实管理员登录、配置草稿发布/回滚和 Excel 经生产管理 API 的流程仍待邀请后验证。
+- 当前配置表 ItemCount 为 0，公共服务使用打包并校验过的 `bundle-demo-2.0.0` seed；这不是配置发布成功的证据。
+- 未在日本网络的真实 PC/手机上验证触摸、系统分享、相册保存或完整 Cognito 跳转；390px Playwright 是浏览器模拟。
+- 未配置 `BUDGET_ALERT_EMAIL`，因此没有创建费用邮件通知。大陆网络测试、真实统计参数研究、MFA、实际相亲/聊天和双向接受度仍不在本轮范围。
 
 ## 下一步
 
-1. 如需上线 v2，另行取得针对 AWS 账户、区域、回调地址和本次写操作的明确授权，再依次执行只读 diff、deploy 和真实 Cognito/配置/匿名流程验证。
-2. 上线后补做日本真实 PC 与手机验收；不能把 Playwright 模拟描述为实际设备验证。
+1. 用户提供应用管理员邀请邮箱后，以 Cognito 受控邀请创建首个管理员并加入 `config-admin`，再验证真实 PKCE 登录、Excel 导入、配置发布与回滚。发送邀请属于新的外部消息动作，不猜测收件人。
+2. 用日本真实 PC 与手机完成触摸、系统分享、相册保存和登录跳转验收；不能把 Playwright 模拟描述为实际设备验证。
+3. 如需费用告警，另行提供 `BUDGET_ALERT_EMAIL`；未来 AWS 更新仍需逐次授权。

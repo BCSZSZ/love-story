@@ -1,6 +1,6 @@
 # 06｜技术架构、AWS 部署与费用控制
 
-核对日期：2026-09-28。以下描述是当前 IaC 设计与本地 synth 状态，不代表资源已经部署。官方资料索引见 09。
+核对日期：2026-09-28。以下架构已部署到账户 `212984411858` 的 `prod / ap-northeast-1`；站点为 <https://d2vaw39850chxv.cloudfront.net>。官方资料索引见 09。
 
 ## 1. 技术栈
 
@@ -46,7 +46,7 @@ Admin Config Lambda 和 Public Config Lambda 都没有匿名 records 表权限�
 - MFA 明确为 OFF；首轮不要求 MFA。
 - Web client 无 secret，只允许 authorization code grant；启用 token revocation。
 - access/id token 1 小时，refresh token 1 天。
-- 回调和登出 URL 必须通过部署参数 `ADMIN_CALLBACK_URL` 提供；`https://localhost.invalid/` 只允许离线 synth 占位，不能用于真实部署。
+- 回调和登出 URL 必须通过部署参数 `ADMIN_CALLBACK_URL` 提供；prod 当前为 `https://d2vaw39850chxv.cloudfront.net/`。`https://localhost.invalid/` 只允许离线 synth 占位，不能用于真实部署。
 - 本机开发额外允许 `http://127.0.0.1:5173/`。
 
 ## 4. 数据资源
@@ -86,7 +86,7 @@ HTTP API stage 默认 10 req/s、burst 20；创建记录路由 2 req/s、burst 5
 
 本地关卡：`pnpm verify`、`pnpm test:smoke`、`pnpm infra:synth`。`infra:synth` 只生成模板，不调用远端。`pnpm infra:diff` 在有有效 AWS 只读身份时运行 `cdk diff --no-change-set`；缺少身份时必须明确报告，不能伪造 diff。
 
-创建 Cognito、DynamoDB、S3、CloudFront、API、Lambda、IAM、日志、告警或 Budget 都属于 AWS 写操作，需要针对该次部署的明确授权和正确账户/区域。当前第一轮授权只包含实现和 Git 推送，不包含 bootstrap/deploy。
+创建 Cognito、DynamoDB、S3、CloudFront、API、Lambda、IAM、日志、告警或 Budget 都属于 AWS 写操作，需要针对该次部署的明确授权和正确账户/区域。本轮后来已取得单次部署授权并完成发布；该授权不自动延伸到未来更新或资源删除。
 
 实际部署前必须：
 
@@ -95,6 +95,8 @@ HTTP API stage 默认 10 req/s、burst 20；创建记录路由 2 req/s、burst 5
 3. 展示 diff、资源和费用影响。
 4. 获得部署授权后才 bootstrap/deploy。
 5. 部署后再验证 Cognito 登录、配置发布/回滚、匿名保存、CloudFront 缓存及日本 PC/手机流程。
+
+本轮实际结果：两个 stack 均为 `UPDATE_COMPLETE`；配置表 ACTIVE/PAY_PER_REQUEST/删除保护开启，配置桶 versioning Enabled，CloudFront Deployed，14 条 API route，部署后 `cdk diff` 为零。Hosted Login 可达、未认证管理请求返回 401；尚未提供邀请邮箱，因此未创建应用管理员，完整授权码登录与配置发布仍待管理员邀请后验收。
 
 ## 8. 费用与回滚
 

@@ -79,7 +79,7 @@ async function runDesktop() {
     await assertNoOverflow(page);
 
     await page.locator('button:visible').filter({ hasText: '查看完整结果' }).first().click();
-    await page.getByText('上海同城条件池', { exact: true }).first().waitFor();
+    await page.getByText(/上海同城条件池$/).first().waitFor();
     await page.getByText('圈层内预计可触达', { exact: true }).first().waitFor();
     const before = await page.locator('.result-hero .result-pair article').first().locator('strong').textContent();
     await page.locator('.strictness-row').first().getByRole('button', { name: /尽量满足/ }).click();
@@ -135,7 +135,7 @@ async function runMobile() {
     await page.locator('.mobile-summary').waitFor();
     await assertNoOverflow(page);
     await page.locator('button:visible').filter({ hasText: '查看完整结果' }).first().click();
-    await page.getByText('大阪同城条件池', { exact: true }).first().waitFor();
+    await page.getByText(/大阪同城条件池$/).first().waitFor();
     await page.getByText('圈层内预计可触达', { exact: true }).first().waitFor();
     const restored = await page.locator('.result-hero .result-pair article').first().locator('strong').textContent();
     await page.reload({ waitUntil: 'networkidle' });
