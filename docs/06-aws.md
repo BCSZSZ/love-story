@@ -96,7 +96,7 @@ HTTP API stage 默认 10 req/s、burst 20；创建记录路由 2 req/s、burst 5
 4. 获得部署授权后才 bootstrap/deploy。
 5. 部署后再验证 Cognito 登录、配置发布/回滚、匿名保存、CloudFront 缓存及日本 PC/手机流程。
 
-本轮实际结果：两个 stack 均为 `UPDATE_COMPLETE`；配置表 ACTIVE/PAY_PER_REQUEST/删除保护开启，配置桶 versioning Enabled，CloudFront Deployed，14 条 API route，部署后 `cdk diff` 为零。Hosted Login 可达、未认证管理请求返回 401；尚未提供邀请邮箱，因此未创建应用管理员，完整授权码登录与配置发布仍待管理员邀请后验收。
+本轮实际结果：两个 stack 均为 `UPDATE_COMPLETE`；配置表 ACTIVE/PAY_PER_REQUEST/删除保护开启，配置桶 versioning Enabled，CloudFront Deployed，14 条 API route，部署后 `cdk diff` 为零。Hosted Login 可达、未认证管理请求返回 401。首个应用管理员已按用户指定的收件邮箱通过受控邀请创建并加入 `config-admin`；精确查询为 enabled、email verified、`FORCE_CHANGE_PASSWORD`。邀请邮件投递已触发，但完整授权码登录与配置发布仍待收件人完成首次改密后验收。
 
 ## 8. 费用与回滚
 

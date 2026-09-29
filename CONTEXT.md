@@ -1,6 +1,6 @@
 # 当前项目状态
 
-更新时间：2026-09-28。
+更新时间：2026-09-29。
 
 ## 结论
 
@@ -39,16 +39,18 @@ Git 交付已完成：用户提供首次创建的空仓库 `https://github.com/B
 - 公网接口核验：health 200、上传开启；active 配置为 `bundle-demo-2.0.0` / checksum `46e5a69d…c2ca` / 62 问题 / 4 城市；管理员认证配置 enabled 且 redirect URI 正确；无 token 管理请求返回 401；active 缓存 60 秒，历史配置一年 immutable 且得到 CloudFront hit。
 - `pnpm test:smoke:deployed https://d2vaw39850chxv.cloudfront.net`：桌面 `1280×900` 与移动 `390×844` 全部通过云端保存、双结果、五档、圈层、刷新恢复，桌面 PNG 通过；两条合成记录均 DELETE 204。首次运行暴露公网脚本把完整城市标签误当短标题精确匹配，修正断言后最小复现连续两次及完整 smoke 均通过。
 - 部署后 `pnpm infra:diff`：两个 stack 均 `There were no differences`；`tls-prod-api-5xx` 与 `tls-prod-lambda-errors` 均为 OK。Cognito Hosted Login 返回 200 并显示登录表单。
+- `aws cognito-idp admin-create-user` 与 `admin-add-user-to-group`：首个应用管理员已按用户指定的收件邮箱受控创建，EMAIL 投递请求成功，并加入 `config-admin`。
+- `aws cognito-idp admin-get-user` 与 `admin-list-groups-for-user`：精确查询确认用户已启用、邮箱已验证、状态为 `FORCE_CHANGE_PASSWORD`，且只属于 `config-admin`。仓库未记录完整邮箱、临时密码或 token。
 
 ## 未执行或未验证
 
-- 尚未创建应用管理员：Cognito User Pool、Hosted Login 和鉴权边界已部署，但没有用户指定的邀请邮箱，不能代替用户选择收件人。真实管理员登录、配置草稿发布/回滚和 Excel 经生产管理 API 的流程仍待邀请后验证。
+- 应用管理员邀请已创建，但收件人尚未完成首次登录与强制改密；因此真实 Authorization Code + PKCE 登录、配置草稿发布/回滚和 Excel 经生产管理 API 的流程仍未验证。
 - 当前配置表 ItemCount 为 0，公共服务使用打包并校验过的 `bundle-demo-2.0.0` seed；这不是配置发布成功的证据。
 - 未在日本网络的真实 PC/手机上验证触摸、系统分享、相册保存或完整 Cognito 跳转；390px Playwright 是浏览器模拟。
 - 未配置 `BUDGET_ALERT_EMAIL`，因此没有创建费用邮件通知。大陆网络测试、真实统计参数研究、MFA、实际相亲/聊天和双向接受度仍不在本轮范围。
 
 ## 下一步
 
-1. 用户提供应用管理员邀请邮箱后，以 Cognito 受控邀请创建首个管理员并加入 `config-admin`，再验证真实 PKCE 登录、Excel 导入、配置发布与回滚。发送邀请属于新的外部消息动作，不猜测收件人。
+1. 收件人使用 Cognito 邀请邮件中的临时密码完成首次登录与强制改密后，验证真实 PKCE 登录、Excel 导入、配置发布与回滚；不要在聊天、日志或仓库中记录临时密码和最终密码。
 2. 用日本真实 PC 与手机完成触摸、系统分享、相册保存和登录跳转验收；不能把 Playwright 模拟描述为实际设备验证。
 3. 如需费用告警，另行提供 `BUDGET_ALERT_EMAIL`；未来 AWS 更新仍需逐次授权。

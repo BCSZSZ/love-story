@@ -1,7 +1,7 @@
 # 11｜第一轮需求实装计划
 
-状态：`IMPLEMENTED_PUSHED_AND_DEPLOYED / ADMIN_INVITE_PENDING`  
-日期：2026-09-28  
+状态：`IMPLEMENTED_PUSHED_AND_DEPLOYED / ADMIN_FIRST_LOGIN_PENDING`
+日期：2026-09-29
 范围：落实 `docs/10-first-round-change-spec.md`；本地实现、验证、提交、推送，并在后续取得单次明确授权后部署到 AWS。
 
 ## 模块与 seam
@@ -70,4 +70,4 @@
 - `python scripts/validate_design.py`、Node 24 下的 `pnpm doctor:project`、`pnpm verify`、`pnpm test:smoke` 与 `pnpm infra:synth` 均通过。
 - `pnpm verify` 实际结果为 5 个 Vitest 文件、41 个测试；浏览器冒烟为桌面/移动共 4 个流程；synth 为 2 个模板、67 个资源、14 条路由和 3 个 Lambda。
 - R6 已完成：用户提供首次创建的空仓库 `https://github.com/BCSZSZ/love-story`；确认远端无 refs 后初始化 `main`，根提交 `ca3a31a` 已通过普通非强制 push 发布到 `origin/main`。
-- R7 基础上线已完成：SSO 身份为账户 `212984411858` 的管理员角色；两个 stack 更新成功，前端上传和 invalidation 完成，公网桌面/移动匿名 smoke 通过且合成记录均删除，部署后 diff 为零。Cognito Hosted Login、MFA OFF、受控邀请、回调与无 token 401 已验证；仍缺具体管理员邀请邮箱，因此真实管理员登录、配置发布/回滚和实际手机检查未完成。
+- R7 基础上线已完成：SSO 身份为账户 `212984411858` 的管理员角色；两个 stack 更新成功，前端上传和 invalidation 完成，公网桌面/移动匿名 smoke 通过且合成记录均删除，部署后 diff 为零。Cognito Hosted Login、MFA OFF、受控邀请、回调与无 token 401 已验证；首个管理员已通过用户指定邮箱创建、启用并加入 `config-admin`，当前为 `FORCE_CHANGE_PASSWORD`。真实管理员登录、配置发布/回滚和实际手机检查仍未完成。

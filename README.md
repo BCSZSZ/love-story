@@ -2,7 +2,7 @@
 
 面向中文成年用户的匿名择偶条件演示估算器。用户先选择一个真实匹配城市，再以 62 个初始问题估算“同城条件池”和“圈层内预计可触达”两个结果。所有人口比例、评分与社交圈参数都是可管理的演示配置，不是真实人口统计；本项目不是实际相亲服务。
 
-第一轮 v2 已实现并于 2026-09-28 部署到 AWS 东京区域：<https://d2vaw39850chxv.cloudfront.net>。桌面与 390px 移动视口的公网匿名流程已验证；实际手机检查和应用管理员首次邀请仍待完成。
+第一轮 v2 已实现并于 2026-09-28 部署到 AWS 东京区域：<https://d2vaw39850chxv.cloudfront.net>。桌面与 390px 移动视口的公网匿名流程已验证；应用管理员邀请已触发，实际手机检查和管理员首次登录仍待完成。
 
 ## 本地运行
 
@@ -54,7 +54,7 @@ scripts/                     doctor、smoke、synth 检查和受保护发布流�
 
 主区域设计为 `ap-northeast-1`。`pnpm release:plan` 只展示计划；`pnpm infra:diff` 固定使用只读的 `cdk diff --no-change-set`。真实发布还必须单独提供 AWS profile、12 位账户、无 URL fragment 的 HTTPS `ADMIN_CALLBACK_URL`，以及本次部署授权。实现或 Git 推送授权不等于 AWS 部署授权。
 
-本轮已在用户逐次明确授权后完成 SSO 身份核验、无 change-set 的 diff、CDK deploy、静态上传、CloudFront invalidation 和公网冒烟；部署后 diff 为零。仓库不保存 AWS 密钥、管理员 token 或告警邮箱。Cognito User Pool 已创建，但尚未邀请具体应用管理员。
+本轮已在用户逐次明确授权后完成 SSO 身份核验、无 change-set 的 diff、CDK deploy、静态上传、CloudFront invalidation 和公网冒烟；部署后 diff 为零。Cognito 首个应用管理员已通过受控邀请创建并加入 `config-admin`，当前等待首次登录强制改密。仓库不保存 AWS 密钥、完整管理员邮箱、临时密码、管理员 token 或告警邮箱。
 
 ## 资料入口
 
